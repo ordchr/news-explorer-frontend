@@ -1,0 +1,30 @@
+@import url(../../vendor/normalize.css);
+
+.page {
+  background-color: #1A1B22;
+  color: #FFFFFF;
+  height: 1000px;
+  padding: 100px 132px;
+  min-width: 300px;
+
+  font-family: 'Roboto', 'Arial', 'sans-serif';
+  font-style: normal;
+  font-weight: normal;
+
+  /* display: flex; */
+  /* align-items: center; */
+}
+
+.page__section {
+  max-width: 1440px;
+  margin: auto;
+}
+
+* { outline: 2px dotted red; }
+* * { outline: 2px dotted green; }
+* * * { outline: 2px dotted orange; }
+* * * * { outline: 2px dotted blue; }
+* * * * * { outline: 1px solid red; }
+* * * * * * { outline: 1px solid green; }
+* * * * * * * { outline: 1px solid orange; }
+* * * * * * * * { outline: 1px solid blue; }
