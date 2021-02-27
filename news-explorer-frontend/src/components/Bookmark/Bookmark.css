@@ -1,0 +1,14 @@
+.bookmark {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmark__image {
+  height: 19px;
+  width: 14px;
+}
