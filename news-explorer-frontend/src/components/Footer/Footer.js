@@ -1,3 +1,4 @@
+import React from 'react';
 import "./Footer.css";
 import IconGithub from "../../images/icon_github.svg";
 import IconFacebook from "../../images/icon_facebook.svg";
