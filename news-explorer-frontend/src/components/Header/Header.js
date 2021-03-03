@@ -10,7 +10,7 @@ function Header({ isLoggedIn }) {
     <header className={headerClassName}>
       <h2 className="header__title">NewsExplorer</h2>
       <div className="header__nav">
-        <NavLink exact to="/ui"
+        <NavLink exact to="/"
           className="header__nav-link header__nav-link_not-logged-in"
           activeClassName="header__nav-link-active header__nav-link-active_not-logged-in"
         >
@@ -19,13 +19,6 @@ function Header({ isLoggedIn }) {
         {
           isLoggedIn
             ?
-              <NavLink exact to="/authorize"
-                className="header__nav-link header__nav-link_not-logged-in"
-                activeClassName="header__nav-link-active header__nav-link-active_not-logged-in"
-              >
-                <button className="header__nav-link-button-log-in">Авторизоваться</button>
-              </NavLink>
-            :
             <>
               <NavLink exact to="/saved_articles"
                 className="header__nav-link header__nav-link_logged-in"
@@ -40,6 +33,13 @@ function Header({ isLoggedIn }) {
                 <button className="header__nav-link-logout">Грета</button>
               </NavLink>
             </>
+            :
+              <NavLink exact to="/authorize"
+                className="header__nav-link header__nav-link_not-logged-in"
+                activeClassName="header__nav-link-active header__nav-link-active_not-logged-in"
+              >
+                <button className="header__nav-link-button-log-in">Авторизоваться</button>
+              </NavLink>
         }
       </div>
     </header>
