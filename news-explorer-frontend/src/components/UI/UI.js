@@ -72,11 +72,11 @@ function UI() {
 
       <ShowMoreButton></ShowMoreButton>
 
-      <Bookmark style={{ name: "normal" }} />
+      <Bookmark type={"normal"} />
 
-      <Bookmark style={{ name: "hover" }} />
+      <Bookmark type={"hover"} />
 
-      <Bookmark style={{ name: "marked" }} />
+      <Bookmark type={"marked"} />
 
       <LoginFormPopup
         isOpen={isLoginFormPopupOpen}

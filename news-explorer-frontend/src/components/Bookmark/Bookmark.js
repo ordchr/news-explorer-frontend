@@ -1,16 +1,24 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import './Bookmark.css';
-import icon_normal from '../../images/bookmark_normal.svg';
-import icon_hover from '../../images/bookmark_hover.svg';
-import icon_marked from '../../images/bookmark_marked.svg';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import "./Bookmark.css";
+import icon_normal from "../../images/bookmark_normal.svg";
+import icon_hover from "../../images/bookmark_hover.svg";
+import icon_marked from "../../images/bookmark_marked.svg";
 
-function Bookmark({ style }) {
+function Bookmark({ type }) {
   let src;
+  console.log(type);
 
-  if ( style.name === 'marked' ) {
+  if (!type) {
+    return(
+      <>
+      </>
+    );
+  }
+
+  if (type === "marked") {
     src = icon_marked;
-  } else if ( style.name === 'hover' ) {
+  } else if (type === "hover") {
     src = icon_hover;
   } else {
     src = icon_normal;
