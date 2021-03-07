@@ -33,5 +33,22 @@
 }
 
 .footer__navi-social {
+  display: flex;
+  justify-content: center;
   margin-left: 40px;
+}
+
+@media screen and (max-width: 1024px) {
+  .footer {
+    margin: 0 40px 0;
+  }
+  .footer__navi-social {
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer__navi-link {
+    margin-left: 20px;
+  }
 }
