@@ -3,6 +3,7 @@ import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import UI from '../UI/UI';
 import Main from '../Main/Main';
+import SavedNews from '../SavedNews/SavedNews';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           </Route>
           <Route path="/ui">
             <UI />
+          </Route>
+          <Route path="/saved-news">
+            <SavedNews />
           </Route>
         </Switch>
       </div>

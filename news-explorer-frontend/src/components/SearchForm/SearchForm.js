@@ -5,7 +5,7 @@ import Header from "../Header/Header";
 function SearchForm() {
   return (
     <div className="search-form">
-      <Header isAuthorized={false} />
+      <Header isLoggedIn={false} isMainPage={true} />
 
       <div className="search-form-head">
         <h1 className="search-form-head__title">Что творится в мире?</h1>

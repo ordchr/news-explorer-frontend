@@ -1,7 +1,7 @@
 .about {
   display: flex;
-  justify-content: space-between;
-  margin: 80px 104px 80px;
+  justify-content: start;
+  margin: 80px 104px;
 }
 
 .about__avatar {
@@ -12,6 +12,7 @@
 .about__description {
   display: flex;
   width: 100%;
+  max-width: 600px;
   flex-direction: column;
   margin: 51px 0 0 56px;
 }
@@ -34,4 +35,38 @@
   line-height: 24px;
   text-align: left;
   margin: 0 0 32px;
+}
+
+@media screen and (max-width: 1150px) {
+  .about {
+    margin: 60px;
+  }
+  .about__avatar {
+    width: 300px;
+    height: 300px;
+    margin-top: 21px;
+  }
+  .about__description {
+    margin: 0 0 0 56px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about {
+    margin: 40px;
+  }
+  .about__avatar {
+    width: 232px;
+    height: 232px;
+  }
+  .about__description {
+    margin: 0 0 0 32px;
+    max-width: 424px;
+  }
+  .about__description-title {
+    font-size: 30px;
+    line-height: 40px;
+    margin: 0 0 16px;
+  }
+
 }

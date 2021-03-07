@@ -7,7 +7,6 @@ function NewsCardList({newsCards}) {
 
   return (
       <section className="news-card-list">
-        <h4 className="news-card-list__title">Результаты поиска</h4>
         <div className="news-card-list__cards">
         {
           newsCards.map(

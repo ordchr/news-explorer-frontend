@@ -35,11 +35,12 @@ function NewsCard({ newsCard }) {
 
   return (
     <div className="news-card">
-      <img
-        src={urlToImage}
+      <div
+        style={{ backgroundImage: `url(${urlToImage})` }}
+        backgroundImage={urlToImage}
         className="news-card__image"
-        alt="news card image"
-      />
+      >
+      </div>
       { keyword && label_keyword({keyword}) }
       <div className="news-card__top-panel">
         { actionName && button_action({actionName}) }
@@ -48,8 +49,10 @@ function NewsCard({ newsCard }) {
         </div>
       </div>
       <p className="news-card__publishedAt">{publishedAt}</p>
-      <h4 className="news-card__title">{title}</h4>
-      <p className="news-card__description">{description}</p>
+      <div className="news-card__content">
+        <div className="news-card__title">{title}</div>
+        <p className="news-card__description">{description}</p>
+      </div>
       <p className="news-card__source-name">{sourceName}</p>
     </div>
   );

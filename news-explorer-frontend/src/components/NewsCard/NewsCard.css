@@ -1,18 +1,20 @@
 .news-card {
   position: relative;
-  width: 400px;
-  height: 576px;
+  /* width: 400px; */
+  min-width: 335px;
+  /* height: 576px; */
   display: flex;
   flex-direction: column;
   border-radius: 16px;
   background-color: #FFF;
+  cursor: url(../../images/pointer.svg), auto;
 }
 
 .news-card__image {
-  width: 400px;
+  /* width: 400px; */
   min-height: 272px;
   border-radius: 16px 16px 0 0;
-  object-fit: fill;
+  background-size: auto 272px;
 }
 
 .news-card__publishedAt {
@@ -26,6 +28,15 @@
   margin: 20px 24px 0;
 }
 
+.news-card__content {
+  max-height: 182px;
+  display: grid;
+  row-gap: 16px;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(90px, 1fr) minmax(90px, 1fr);
+  margin: 12px 24px 0;
+}
+
 .news-card__title {
   font-family: Roboto Slab;
   font-size: 26px;
@@ -33,19 +44,21 @@
   font-weight: 400;
   line-height: 30px;
   text-align: left;
-  margin: 12px 24px 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
 }
 
 .news-card__description {
   display: block;
-  overflow: hidden;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
   text-align: left;
   text-overflow: ellipsis;
-  margin: 16px 24px 0;
+  overflow: hidden;
+  margin: 0;
 }
 
 .news-card__source-name {
@@ -89,6 +102,9 @@
   margin: 0 5px;
   box-shadow: 0px 10px 22px rgba(59, 74, 116, 0.1);
   justify-self: flex-end;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .news-card__action-name {
@@ -109,4 +125,46 @@
   display: flex;
   justify-content: flex-end;
   margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .news-card {
+    position: relative;
+    min-width: 224px;
+    /* height: 576px; */
+  }
+  .news-card__image {
+    /* width: 400px; */
+    min-height: 150px;
+    border-radius: 16px 16px 0 0;
+    background-size: auto 150px;
+  }
+  .news-card__title {
+    font-size: 22px;
+    line-height: 24px;
+  }
+  .news-card__content {
+    max-height: 160px;
+    row-gap: 10px;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(72px, 1fr) minmax(90px, 1fr);
+    margin: 12px 14px 0;
+  }
+  .news-card__source-name {
+    margin: 12px 32px 26px 16px;
+  }
+  .news-card__top-panel {
+    top: 8px;
+  }
+  .news-card__keyword {
+    top: 8px;
+    margin: 0 5px 0 8px;
+  }
+  .news-card__bookmark {
+    margin: 0 8px 0 5px;
+  }
+  .news-card__action {
+    max-width: 50px;
+  }
+
 }
