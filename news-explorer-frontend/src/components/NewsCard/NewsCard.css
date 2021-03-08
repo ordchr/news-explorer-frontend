@@ -168,3 +168,34 @@
   }
 
 }
+
+@media screen and (max-width: 500px) {
+  .news-card__top-panel {
+    top: 16px;
+  }
+  .news-card__bookmark {
+    margin: 0 16px 0 5px;
+  }
+  .news-card__keyword {
+    top: 16px;
+    margin: 0 5px 0 16px;
+  }
+  .news-card__action {
+    max-width: 100px;
+  }
+  .news-card__image {
+    min-height: 196px;
+    background-size: auto 196px;
+  }
+  .news-card__publishedAt {
+    margin: 16px 16px 0;
+  }
+  .news-card__content {
+    max-height: 154px;
+    margin: 10px 16px 0;
+    grid-template-rows: minmax(56px, 1fr) minmax(88px, 1fr);
+  }
+  .news-card__source-name {
+    margin: 8px 16px 17px;
+  }
+}
