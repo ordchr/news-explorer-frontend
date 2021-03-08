@@ -50,6 +50,9 @@
     grid-auto-rows: 446px;
     grid-gap: 10px;
   }
+  .news-card-list {
+    padding: 0;
+  }
 
 }
 
