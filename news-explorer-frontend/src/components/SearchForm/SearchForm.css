@@ -36,30 +36,40 @@
   font-weight: 400;
   line-height: 24px;
   text-align: left;
-  color: #FFF;
+  color: #fff;
   margin: 32px 0 0;
 }
 
 .search-form-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: relative;
   height: 64px;
-  width: 608px;
+  width: 100%;
   display: flex;
-  border-radius: 100px;
   margin: 64px 0 80px;
+}
 
-  background-color: #FFF;
+.search-form-input__search-text-wrapper {
+  /* width: calc(100% - 21px - 24px - 168px); */
+  /* margin: 21px 24px; */
+  width: 100%;
+  background-color: #fff;
+  border-radius: 100px;
+  height: 100%;
 }
 
 .search-form-input__search-text {
-  margin: 21px 24px;
-  width: calc(100% - 21px - 24px - 168px);
+  margin: 17px 16px;
+  /* width: 100%; */
 
   font-size: 16px;
   font-style: normal;
   line-height: 22px;
   font-weight: 400;
-  color: #1A1B22;
+  color: #1a1b22;
   border: none;
 }
 
@@ -70,25 +80,25 @@
   width: 168px;
   height: 100%;
 
-  background-color: #2F71E5;
+  background-color: #2f71e5;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
-  color: #FFF;
+  color: #fff;
 
   cursor: url(../../images/pointer.svg), auto;
 }
 
 .search-form-input__to-go:active {
-  background-color: #347EFF;
+  background-color: #347eff;
 }
 
 .search-form-input__to-go:hover {
-  background-color: #347EFF;
+  background-color: #347eff;
 }
 
-.search-form-input__to-go:focus  {
-  background-color: #2A65CC;
+.search-form-input__to-go:focus {
+  background-color: #2a65cc;
 }
 
 @media screen and (max-width: 768px) {
@@ -108,9 +118,45 @@
   .search-form-input {
     height: 56px;
     margin: 48px 0;
-    width: 452px;
+    /* min-width: 452px; */
   }
   .search-form-head__caption {
     margin-top: 16px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .search-form {
+    background-size: auto 536px;
+    min-height: 536px;
+  }
+  .search-form-head {
+    margin: 30px 16px 0;
+    min-width: 290px;
+    width: auto;
+  }
+  .search-form-head__title {
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .search-form-input {
+    flex-direction: column;
+    margin: 122px 0 0;
+    min-width: 288px;
+    height: 100%;
+  }
+  .search-form-input__search-text-wrapper {
+    width: 288px;
+    height: 56px;
+  }
+  .search-form-input__search-text {
+    width: 260px;
+  }
+  .search-form-input__to-go {
+    padding: 0;
+    margin-top: 16px; 
+    position: relative;
+    width: 288px;
+    height: 56px;
   }
 }
