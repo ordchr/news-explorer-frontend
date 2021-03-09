@@ -3,7 +3,8 @@ import "./NewsCard.css";
 import Bookmark from "../Bookmark/Bookmark";
 
 function NewsCard({ newsCard }) {
-  const { url, title, urlToImage, description, publishedAt, sourceName, actionName, actionHandle, keyword } = newsCard;
+  // actionHandle,
+  const { url, title, urlToImage, description, publishedAt, sourceName, actionName, keyword } = newsCard;
 
   function label_keyword({ keyword }) {
     return <h6 className="news-card__keyword">{keyword}</h6>;
@@ -26,7 +27,6 @@ function NewsCard({ newsCard }) {
     <div className="news-card" onClick={() => openInNewTab(url)}>
       <div
         style={{ backgroundImage: `url(${urlToImage})` }}
-        backgroundImage={urlToImage}
         className="news-card__image"
       ></div>
       {keyword && label_keyword({ keyword })}

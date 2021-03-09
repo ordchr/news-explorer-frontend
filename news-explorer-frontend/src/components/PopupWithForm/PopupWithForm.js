@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import FormValidator from '../utils/FormValidator';
 import "./PopupWithForm.css";
 import { Link } from "react-router-dom";

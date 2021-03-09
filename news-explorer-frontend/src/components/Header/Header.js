@@ -21,8 +21,6 @@ function Header({ isLoggedIn, isMainPage }) {
     setIconMenuIsOpen(!iconMenuIsOpen);
   }
 
-  const logoutButtonCSS = ``;
-
   const iconMenu = isMainPage ? iconMenuWhite : iconMenuBlack;
   const iconMenuClose = isMainPage ? iconMenuCloseWhite : iconMenuCloseBlack;
 

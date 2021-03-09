@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import "./Bookmark.css";
 import icon_normal from "../../images/bookmark_normal.svg";
 import icon_hover from "../../images/bookmark_hover.svg";
@@ -7,7 +6,6 @@ import icon_marked from "../../images/bookmark_marked.svg";
 
 function Bookmark({ type }) {
   let src;
-  console.log(type);
 
   if (!type) {
     return(

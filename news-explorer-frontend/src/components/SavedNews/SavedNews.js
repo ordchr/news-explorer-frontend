@@ -4,8 +4,10 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import NewsCardList from "../NewsCardList/NewsCardList";
 
-function SavedNews({}) {
-  const [newsCards, setNewsCards] = React.useState([
+function SavedNews() {
+  // const [newsCards, setNewsCards] = React.useState();
+
+  const newsCards = [
     {
       title:
         "Определен новый облик российской ракеты для полетов на Луну - РИА НОВОСТИ",
@@ -30,7 +32,7 @@ function SavedNews({}) {
       keyword: "Природа",
       actionName: "Убрать из сохраненных",
     },
-  ]);
+  ];
 
   return (
     <>

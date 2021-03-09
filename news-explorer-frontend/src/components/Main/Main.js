@@ -10,12 +10,13 @@ import LoginFormPopup from '../LoginFormPopup/LoginFormPopup';
 function Main() {
 
   const [isLoginFormPopupOpen, setLoginFormPopupOpen] = React.useState(true);
+  // const [newsCards, setNewsCards] = React.useState();
 
   function closeAllPopups() {
     setLoginFormPopupOpen(false);
   }
 
-  const [newsCards, setNewsCards] = React.useState([
+  const newsCards = [
     {
       title:
         "Определен новый облик российской ракеты для полетов на Луну - РИА НОВОСТИ",
@@ -66,7 +67,7 @@ function Main() {
     //   keyword: "Природа",
     //   actionName: "Убрать из сохраненных",
     // },
-  ]);
+  ];
 
   return (
     <>
