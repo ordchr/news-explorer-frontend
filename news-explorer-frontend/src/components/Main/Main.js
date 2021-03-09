@@ -10,10 +10,12 @@ import LoginFormPopup from '../LoginFormPopup/LoginFormPopup';
 function Main() {
 
   const [isLoginFormPopupOpen, setLoginFormPopupOpen] = React.useState(true);
+  const [iconMenuIsOpen, setIconMenuIsOpen] = React.useState(false);
   // const [newsCards, setNewsCards] = React.useState();
 
   function closeAllPopups() {
     setLoginFormPopupOpen(false);
+    setIconMenuIsOpen(false);
   }
 
   const newsCards = [
@@ -71,7 +73,7 @@ function Main() {
 
   return (
     <>
-      <SearchForm />
+      <SearchForm isIconMenuOpen={iconMenuIsOpen} setIconMenuIsOpen={setIconMenuIsOpen} onHeaderIconMenuClose={closeAllPopups}/>
       <Preloader isSearchInProgress={false} isNotFound={false} />
       <div className="main-search-results">
         <h4 className="main-search-results__title">Результаты поиска</h4>

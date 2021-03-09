@@ -1,17 +1,9 @@
-import React from "react";
+import React, { useEffect, useCallback } from "react";
 // import FormValidator from '../utils/FormValidator';
 import "./PopupWithForm.css";
 import { Link } from "react-router-dom";
 
-function PopupWithForm({
-  title,
-  name,
-  isOpen,
-  onClose,
-  onSubmit,
-  isEnter,
-  children,
-}) {
+function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, children }) {
   // useEffect(() => {
 
   //   const validateOptions = {
@@ -28,13 +20,29 @@ function PopupWithForm({
   //   formValidator.enableValidation();
   // }, [name]);
 
+  const handleUserKeyPress = useCallback((event) => {
+      if (event.keyCode === 27) {
+        onClose();
+      }
+    },
+    []);
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleUserKeyPress, false);
+
+    return () => {
+      window.removeEventListener("keydown", handleUserKeyPress, false);
+    };
+  }, []);
+
   return (
-    <div
-      className={`popup ${
-        isOpen ? "popup_opened" : "popup_closed"
-      }  popup_${name}`}
-    >
-      <div className="popup-container popup__container">
+    <div className={`popup ${isOpen ? "popup_opened" : "popup_closed"}  popup_${name}`} onClick={onClose}>
+      <div
+        className="popup-container popup__container"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <form
           className={`popup__form popup__form-edit_${name}`}
           name={name}
@@ -44,11 +52,8 @@ function PopupWithForm({
         >
           <h4 className="popup__header">{title}</h4>
           {children}
-          <button
-            className="popup__button-save popup__button-save_filled"
-            type="submit"
-          >
-            {isEnter ? "Войти": "Зарегистрироваться" }
+          <button className="popup__button-save popup__button-save_filled" type="submit">
+            {isEnter ? "Войти" : "Зарегистрироваться"}
           </button>
         </form>
 
@@ -64,11 +69,7 @@ function PopupWithForm({
             </Link>
           )}
         </h5>
-        <button
-          type="button"
-          className="popup__button-close"
-          onClick={onClose}
-        />
+        <button type="button" className="popup__button-close" onClick={onClose} />
       </div>
     </div>
   );

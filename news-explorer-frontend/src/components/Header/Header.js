@@ -6,7 +6,7 @@ import iconMenuBlack from "../../images/icon_menu_black.svg";
 import iconMenuCloseWhite from "../../images/icon_menu_close.svg";
 import iconMenuCloseBlack from "../../images/icon_menu_close_black.svg";
 
-function Header({ isLoggedIn, isMainPage }) {
+function Header({ isLoggedIn, isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMenuClose }) {
   const headerNavLinkCSS = `header__nav-link ${
     isMainPage ? "header__nav-link_main-page" : "header__nav-link_saved-news-page"
   }`;
@@ -14,12 +14,6 @@ function Header({ isLoggedIn, isMainPage }) {
   const headerIconMenuNavLinkCSS = `header-icon-menu__link ${
     isMainPage ? "header-icon-menu__link_main-page" : "header-icon-menu__link_saved-news"
   }`;
-
-  const [iconMenuIsOpen, setIconMenuIsOpen] = React.useState(false);
-
-  function handleIconMenuButtonClick() {
-    setIconMenuIsOpen(!iconMenuIsOpen);
-  }
 
   const iconMenu = isMainPage ? iconMenuWhite : iconMenuBlack;
   const iconMenuClose = isMainPage ? iconMenuCloseWhite : iconMenuCloseBlack;
@@ -58,19 +52,23 @@ function Header({ isLoggedIn, isMainPage }) {
       </div>
       <img
         className="header-icon-menu__button"
-        src={iconMenuIsOpen ? iconMenuClose : iconMenu}
+        src={isIconMenuOpen ? iconMenuClose : iconMenu}
         alt="icon menu"
-        onClick={handleIconMenuButtonClick}
+        onClick={setIconMenuIsOpen}
       />
 
       <div
-        className={`header-icon-menu ${iconMenuIsOpen ? "header-icon-menu_opened" : "header-icon-menu_closed"}
+        className={`header-icon-menu ${isIconMenuOpen ? "header-icon-menu_opened" : "header-icon-menu_closed"}
         `}
+        onClick={onHeaderIconMenuClose}
       >
         <div
           className={`header-icon-menu__container ${
             isMainPage ? "header-icon-menu__container_main-page" : "header-icon-menu__container_saved-news"
           }`}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
         >
           <div
             className={`header-icon-menu__main-line ${
@@ -80,9 +78,9 @@ function Header({ isLoggedIn, isMainPage }) {
             <h2 className="header__title">NewsExplorer</h2>
             <img
               className="header-icon-menu__button"
-              src={iconMenuIsOpen ? iconMenuClose : iconMenu}
+              src={isIconMenuOpen ? iconMenuClose : iconMenu}
               alt="icon menu"
-              onClick={handleIconMenuButtonClick}
+              onClick={onHeaderIconMenuClose}
             />
           </div>
           <NavLink exact to="/" className={headerIconMenuNavLinkCSS}>

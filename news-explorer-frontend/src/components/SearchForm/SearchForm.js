@@ -2,10 +2,16 @@ import React from "react";
 import "./SearchForm.css";
 import Header from "../Header/Header";
 
-function SearchForm() {
+function SearchForm({ onHeaderIconMenuClose, isIconMenuOpen, setIconMenuIsOpen }) {
   return (
     <div className="search-form">
-      <Header isLoggedIn={false} isMainPage={true} />
+      <Header
+        isLoggedIn={false}
+        isMainPage={true}
+        isIconMenuOpen={isIconMenuOpen}
+        setIconMenuIsOpen={setIconMenuIsOpen}
+        onHeaderIconMenuClose={onHeaderIconMenuClose}
+      />
 
       <div className="search-form-head">
         <h1 className="search-form-head__title">Что творится в мире?</h1>
