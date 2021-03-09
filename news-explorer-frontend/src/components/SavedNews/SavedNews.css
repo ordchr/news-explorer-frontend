@@ -11,11 +11,12 @@
   line-height: 24px;
   text-align: left;
   color: rgba(26, 27, 34, 0.5);
+  margin: 0;
 }
 
 .saved-news__title {
   max-width: 530px;
-  margin-top: 28px;
+  margin: 28px 0 0;
   font-family: Roboto Slab;
   font-size: 40px;
   font-style: normal;
@@ -39,4 +40,17 @@
   font-style: normal;
   font-weight: 700;
   line-height: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .saved-news {
+    margin: 8px 16px 0;
+  }
+  .saved-news__title {
+    font-size: 30px;
+    line-height: 34px;
+  }
+  .saved-news__description {
+    margin: 16px 0 0;
+  }
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
-import iconMenu from "../../images/icon_menu.svg";
-import iconMenuClose from "../../images/icon_menu_close.svg";
+import iconMenuWhite from "../../images/icon_menu.svg";
+import iconMenuBlack from "../../images/icon_menu_black.svg";
+import iconMenuCloseWhite from "../../images/icon_menu_close.svg";
+import iconMenuCloseBlack from "../../images/icon_menu_close_black.svg";
 
 function Header({ isLoggedIn, isMainPage }) {
   const headerNavLinkCSS = `header__nav-link ${
@@ -20,6 +22,9 @@ function Header({ isLoggedIn, isMainPage }) {
   }
 
   const logoutButtonCSS = ``;
+
+  const iconMenu = isMainPage ? iconMenuWhite : iconMenuBlack;
+  const iconMenuClose = isMainPage ? iconMenuCloseWhite : iconMenuCloseBlack;
 
   return (
     <header
@@ -58,7 +63,11 @@ function Header({ isLoggedIn, isMainPage }) {
         className={`header-icon-menu ${iconMenuIsOpen ? "header-icon-menu_opened" : "header-icon-menu_closed"}
         `}
       >
-        <div className="header-icon-menu__container header-icon-menu_main-page">
+        <div
+          className={`header-icon-menu__container ${
+            isMainPage ? "header-icon-menu__container_main-page" : "header-icon-menu__container_saved-news"
+          }`}
+        >
           <div
             className={`header-icon-menu__main-line ${
               isMainPage ? "header-icon-menu__main-line_main-page" : "header-icon-menu__main-line_saved-news"
@@ -82,7 +91,11 @@ function Header({ isLoggedIn, isMainPage }) {
                 Сохраненные статьи
               </NavLink>
               <NavLink exact to="/logout" className="header__nav-link header__nav-link-logout_icon-menu">
-                <button className="header__nav-link-logout header__nav-link-logout_icon-menu header__nav-link-logout_main-page">
+                <button
+                  className={`header__nav-link-logout ${
+                    isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
+                  } `}
+                >
                   Грета
                 </button>
               </NavLink>
