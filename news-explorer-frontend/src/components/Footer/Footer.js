@@ -6,25 +6,25 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <div className="footer">
+    <footer className="footer">
       <h3 className="footer__copyright">© 2020 Supersite, Powered by News API</h3>
       <div className="footer__navi">
         <Link to="/" className="footer__navi-link">
           Главная
         </Link>
-        <a href="https://praktikum.yandex.ru" className="footer__navi-link">
+        <a href="https://praktikum.yandex.ru" target="_blank" className="footer__navi-link">
           Яндекс.Практикум
         </a>
       </div>
       <div className="footer__navi-social">
-        <a href="https://github.com" className="footer__navi-social-link">
+        <a href="https://github.com" target="_blank" className="footer__navi-social-link">
           <img src={IconGithub} alt="github" />
         </a>
-        <a href="https://facebook.com" className="footer__navi-social-link">
+        <a href="https://facebook.com" target="_blank" className="footer__navi-social-link">
           <img src={IconFacebook} alt="facebook" />
         </a>
       </div>
-    </div>
+    </footer>
   );
 }
 

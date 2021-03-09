@@ -3,47 +3,35 @@ import "./NewsCard.css";
 import Bookmark from "../Bookmark/Bookmark";
 
 function NewsCard({ newsCard }) {
-  const {
-    url,
-    title,
-    urlToImage,
-    description,
-    publishedAt,
-    sourceName,
-    actionName,
-    actionHandle,
-    keyword,
-  } = newsCard;
+  const { url, title, urlToImage, description, publishedAt, sourceName, actionName, actionHandle, keyword } = newsCard;
 
   function label_keyword({ keyword }) {
-    return (
-      <h6 className="news-card__keyword">
-        {keyword} 
-      </h6>
-    );
+    return <h6 className="news-card__keyword">{keyword}</h6>;
   }
 
   function button_action({ actionName }) {
     return (
       <div className="news-card__action">
-        <h6 className="news-card__action-name">
-          {actionName}
-        </h6>
+        <h6 className="news-card__action-name">{actionName}</h6>
       </div>
     );
   }
 
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
   return (
-    <div className="news-card">
+    <div className="news-card" onClick={() => openInNewTab(url)}>
       <div
         style={{ backgroundImage: `url(${urlToImage})` }}
         backgroundImage={urlToImage}
         className="news-card__image"
-      >
-      </div>
-      { keyword && label_keyword({keyword}) }
+      ></div>
+      {keyword && label_keyword({ keyword })}
       <div className="news-card__top-panel">
-        { actionName && button_action({actionName}) }
+        {actionName && button_action({ actionName })}
         <div className="news-card__bookmark">
           <Bookmark type={"normal"} />
         </div>

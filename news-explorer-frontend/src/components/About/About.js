@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./About.css";
 import AboutAvatar from '../../images/about.png';
 

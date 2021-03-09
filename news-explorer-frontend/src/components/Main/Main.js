@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
@@ -12,10 +12,7 @@ function Main() {
   const [isLoginFormPopupOpen, setLoginFormPopupOpen] = React.useState(true);
 
   function closeAllPopups() {
-    // setisEditAvatarPopupOpen(false);
     setLoginFormPopupOpen(false);
-    // setisAddPlacePopupOpen(false);
-    // setSelectedCard({});
   }
 
   const [newsCards, setNewsCards] = React.useState([
@@ -85,7 +82,7 @@ function Main() {
       <Footer />
 
       <LoginFormPopup
-        isOpen={false}
+        isOpen={isLoginFormPopupOpen}
         onClose={closeAllPopups}
       />
     </>

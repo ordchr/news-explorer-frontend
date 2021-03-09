@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import "./LoginFormPopup.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
