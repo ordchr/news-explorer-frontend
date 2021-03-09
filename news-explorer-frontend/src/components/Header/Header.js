@@ -43,7 +43,13 @@ function Header({ isLoggedIn, isMainPage }) {
               Сохраненные статьи
             </NavLink>
             <NavLink exact to="/authorize" className="header__nav-link" activeClassName="header__nav-link-active">
-              <button className="header__nav-link-logout header__nav-link-logout_basic-menu">Грета</button>
+              <button
+                className={`header__nav-link-logout header__nav-link-logout_basic-menu ${
+                  isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
+                }`}
+              >
+                Грета
+              </button>
             </NavLink>
           </>
         ) : (

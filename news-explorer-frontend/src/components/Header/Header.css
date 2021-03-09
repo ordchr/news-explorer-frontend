@@ -214,6 +214,12 @@
   .header__nav-link {
     margin-left: 20px;
   }
+  .header__nav-link-logout_basic-menu {
+    margin-left: 5px;
+  }
+  .header__nav {
+    margin-right: 40px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -224,13 +230,14 @@
     height: 66px;
   }
   .header__title {
-    margin: 40px;
+    margin: 22px 0 18px 40px;
   }
   .header__nav {
     margin: 14px 40px 0 0;
   }
   .header__nav-link {
     font-size: 16px;
+    margin: 0 0 0 10px;
   }
   .header__nav-link-active {
     padding-bottom: 18px;
@@ -243,7 +250,16 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 650px) {
+  .header__title {
+    margin: 22px 0 18px 16px;
+  }
+  .header__nav {
+    margin-right: 16px;
+  }
+}
+
+@media screen and (max-width: 580px) {
   .header {
     height: 56px;
   }
