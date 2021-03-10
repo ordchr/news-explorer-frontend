@@ -34,7 +34,7 @@ function Header({ isLoggedIn, isMainPage, isIconMenuOpen, setIconMenuIsOpen, onH
             <NavLink exact to="/saved-news" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
               Сохраненные статьи
             </NavLink>
-            <NavLink exact to="/" className="header__nav-link" activeClassName="header__nav-link-active">
+            <NavLink exact to="/logout" className="header__nav-link" activeClassName="header__nav-link-active">
               <button
                 className={`header__nav-link-logout header__nav-link-logout_basic-menu ${
                   isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
@@ -45,7 +45,7 @@ function Header({ isLoggedIn, isMainPage, isIconMenuOpen, setIconMenuIsOpen, onH
             </NavLink>
           </>
         ) : (
-          <NavLink exact to="/" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
+          <NavLink exact to="/authorize" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
             <button className="header__button-log-in header__button-log-in_basic-menu">Авторизоваться</button>
           </NavLink>
         )}
@@ -103,7 +103,7 @@ function Header({ isLoggedIn, isMainPage, isIconMenuOpen, setIconMenuIsOpen, onH
               </NavLink>
             </>
           ) : (
-            <NavLink exact to="/" className={headerIconMenuNavLinkCSS}>
+            <NavLink exact to="/authorize" className={headerIconMenuNavLinkCSS}>
               <button className="header__button-log-in header__button-log-in_icon-menu">Авторизоваться</button>
             </NavLink>
           )}
