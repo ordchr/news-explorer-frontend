@@ -20,12 +20,14 @@ function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, childr
   //   formValidator.enableValidation();
   // }, [name]);
 
-  const handleUserKeyPress = useCallback((event) => {
+  const handleUserKeyPress = useCallback(
+    (event) => {
       if (event.keyCode === 27) {
         onClose();
       }
     },
-    []);
+    [onClose]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", handleUserKeyPress, false);
@@ -33,7 +35,7 @@ function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, childr
     return () => {
       window.removeEventListener("keydown", handleUserKeyPress, false);
     };
-  }, []);
+  }, [handleUserKeyPress]);
 
   return (
     <div className={`popup ${isOpen ? "popup_opened" : "popup_closed"}  popup_${name}`} onClick={onClose}>
