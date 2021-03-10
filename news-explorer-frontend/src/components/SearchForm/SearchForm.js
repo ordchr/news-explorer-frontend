@@ -18,12 +18,12 @@ function SearchForm({ onHeaderIconMenuClose, isIconMenuOpen, setIconMenuIsOpen }
         <h4 className="search-form-head__caption">
           Находите самые свежие статьи на любую тему и сохраняйте в своём личном кабинете.
         </h4>
-        <div className="search-form-input">
+        <form action="/" className="search-form-input">
           <div className="search-form-input__search-text-wrapper">
-            <input className="search-form-input__search-text" placeholder="Введите тему новости" />
+            <input className="search-form-input__search-text" placeholder="Введите тему новости" required />
           </div>
           <button className="search-form-input__to-go">Искать</button>
-        </div>
+        </form>
       </div>
     </div>
   );
