@@ -1,0 +1,49 @@
+.delete-button {
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+.delete-button__hint {
+  height: 100%;
+  border-radius: 8px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px 0 0;
+  cursor: default;
+}
+
+.delete-button__hint-text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  color: #000;
+  margin: 0 5px;
+}
+
+.delete-button__button {
+  height: 100%;
+  width: 40px;
+  border-radius: 8px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-button__image {
+  height: 24px;
+  width: 24px;
+}
+
+@media screen and (max-width: 768px) {
+  .delete-button__hint {
+    display: none;
+  }
+}

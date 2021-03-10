@@ -1,0 +1,49 @@
+.bookmark {
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+}
+
+.bookmark__hint-to-login {
+  height: 100%;
+  border-radius: 8px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px 0 0;
+  cursor: default;
+}
+
+.bookmark__hint-to-login-text {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  color: #000;
+  margin: 0 5px;
+}
+
+.bookmark__button {
+  height: 100%;
+  width: 40px;
+  border-radius: 8px;
+  background-color: #FFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bookmark__image {
+  height: 19px;
+  width: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .bookmark__hint-to-login {
+    display: none;
+  }
+}

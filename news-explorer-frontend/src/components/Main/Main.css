@@ -1,0 +1,36 @@
+.main-search-results {
+  padding-top: 80px;
+  background-color: #f5f6f7;
+  margin: 0;
+}
+
+.main-search-results__title {
+  position: relative;
+  font-family: Roboto Slab;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 46px;
+  margin: 0 104px 0;
+}
+
+.main-search-results__cards {
+  margin: 64px 104px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-search-results__cards {
+    margin: 32px 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main-search-results {
+    padding-top: 0;
+  }
+  .main-search-results__title {
+    font-size: 30px;
+    line-height: 34px;
+    margin: 32px 16px 0;
+  }
+}
