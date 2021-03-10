@@ -1,4 +1,4 @@
-.bookmark {
+.delete-button {
   height: 40px;
   display: flex;
   justify-content: flex-start;
@@ -6,7 +6,7 @@
   margin: 0;
 }
 
-.bookmark__hint-to-login {
+.delete-button__hint {
   height: 100%;
   border-radius: 8px;
   background-color: #FFF;
@@ -17,7 +17,7 @@
   cursor: default;
 }
 
-.bookmark__hint-to-login-text {
+.delete-button__hint-text {
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
@@ -27,7 +27,7 @@
   margin: 0 5px;
 }
 
-.bookmark__button {
+.delete-button__button {
   height: 100%;
   width: 40px;
   border-radius: 8px;
@@ -37,13 +37,13 @@
   justify-content: center;
 }
 
-.bookmark__image {
-  height: 19px;
-  width: 14px;
+.delete-button__image {
+  height: 24px;
+  width: 24px;
 }
 
 @media screen and (max-width: 768px) {
-  .bookmark__hint-to-login {
+  .delete-button__hint {
     display: none;
   }
 }

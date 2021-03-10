@@ -4,14 +4,11 @@ import icon_normal from "../../images/bookmark_normal.svg";
 import icon_hover from "../../images/bookmark_hover.svg";
 import icon_marked from "../../images/bookmark_marked.svg";
 
-function Bookmark({ type }) {
+function Bookmark({ type, isLoggedIn }) {
   let src;
 
   if (!type) {
-    return(
-      <>
-      </>
-    );
+    return <></>;
   }
 
   if (type === "marked") {
@@ -24,7 +21,16 @@ function Bookmark({ type }) {
 
   return (
     <div className="bookmark">
-      <img src={src} className="bookmark__image" alt="Pic" />
+      `
+      {!isLoggedIn && (
+        <div className="bookmark__hint-to-login">
+          <h6 className="bookmark__hint-to-login-text">Войдите, чтобы сохранять статьи</h6>
+        </div>
+      )}
+      `
+      <div className="bookmark__button">
+        <img src={src} className="bookmark__image" alt="Pic" />
+      </div>
     </div>
   );
 }

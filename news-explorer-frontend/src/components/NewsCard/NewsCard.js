@@ -1,21 +1,13 @@
 import React from "react";
 import "./NewsCard.css";
 import Bookmark from "../Bookmark/Bookmark";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
-function NewsCard({ newsCard }) {
-  // actionHandle,
-  const { url, title, urlToImage, description, publishedAt, sourceName, actionName, keyword } = newsCard;
+function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
+  const { url, title, urlToImage, description, publishedAt, sourceName, keyword } = newsCard;
 
   function label_keyword({ keyword }) {
     return <h6 className="news-card__keyword">{keyword}</h6>;
-  }
-
-  function button_action({ actionName }) {
-    return (
-      <div className="news-card__action">
-        <h6 className="news-card__action-name">{actionName}</h6>
-      </div>
-    );
   }
 
   const openInNewTab = (url) => {
@@ -25,16 +17,20 @@ function NewsCard({ newsCard }) {
 
   return (
     <div className="news-card" onClick={() => openInNewTab(url)}>
-      <div
-        style={{ backgroundImage: `url(${urlToImage})` }}
-        className="news-card__image"
-      ></div>
+      <div style={{ backgroundImage: `url(${urlToImage})` }} className="news-card__image"></div>
       {keyword && label_keyword({ keyword })}
       <div className="news-card__top-panel">
-        {actionName && button_action({ actionName })}
-        <div className="news-card__bookmark">
-          <Bookmark type={"normal"} />
-        </div>
+        `
+        {isMainPage ? (
+          <div className="news-card__action">
+            <Bookmark type={"normal"} isLoggedIn={isLoggedIn} />
+          </div>
+        ) : (
+          <div className="news-card__action">
+            <DeleteButton />
+          </div>
+        )}
+        `
       </div>
       <p className="news-card__publishedAt">{publishedAt}</p>
       <div className="news-card__content">
