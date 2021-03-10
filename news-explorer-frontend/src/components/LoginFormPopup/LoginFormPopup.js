@@ -47,7 +47,7 @@ function LoginFormPopup({ isOpen, onClose, onUpdateAvatar }) {
           // ref={avatarRef}
         />
       </label>
-      <span id="popup-input-email-error" className="popup__input-error" />
+      <span id="popup-input-password-error" className="popup__input-error" />
     </PopupWithForm>
   );
 }

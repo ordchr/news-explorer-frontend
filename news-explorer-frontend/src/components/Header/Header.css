@@ -70,6 +70,9 @@
   font-weight: 500;
   line-height: 24px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__button-log-in_basic-menu {
@@ -95,6 +98,9 @@
   cursor: url(../../images/pointer.svg), auto;
   padding: 0 40px 0 19px;
   min-width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header__nav-link-logout_main-page {

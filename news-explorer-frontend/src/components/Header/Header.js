@@ -35,18 +35,18 @@ function Header({ isLoggedIn, isMainPage, isIconMenuOpen, setIconMenuIsOpen, onH
               Сохраненные статьи
             </NavLink>
             <NavLink exact to="/logout" className="header__nav-link" activeClassName="header__nav-link-active">
-              <button
+            </NavLink>
+              <div
                 className={`header__nav-link-logout header__nav-link-logout_basic-menu ${
                   isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
                 }`}
               >
                 Грета
-              </button>
-            </NavLink>
+              </div>
           </>
         ) : (
           <NavLink exact to="/authorize" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
-            <button className="header__button-log-in header__button-log-in_basic-menu">Авторизоваться</button>
+            <div className="header__button-log-in header__button-log-in_basic-menu">Авторизоваться</div>
           </NavLink>
         )}
       </div>
@@ -93,18 +93,18 @@ function Header({ isLoggedIn, isMainPage, isIconMenuOpen, setIconMenuIsOpen, onH
                 Сохраненные статьи
               </NavLink>
               <NavLink exact to="/logout" className="header__nav-link header__nav-link-logout_icon-menu">
-                <button
+              </NavLink>
+                <div
                   className={`header__nav-link-logout ${
                     isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
                   } `}
                 >
                   Грета
-                </button>
-              </NavLink>
+                </div>
             </>
           ) : (
             <NavLink exact to="/authorize" className={headerIconMenuNavLinkCSS}>
-              <button className="header__button-log-in header__button-log-in_icon-menu">Авторизоваться</button>
+              <div className="header__button-log-in header__button-log-in_icon-menu">Авторизоваться</div>
             </NavLink>
           )}
         </div>
