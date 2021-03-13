@@ -10,7 +10,13 @@ import LoginFormPopup from "../LoginFormPopup/LoginFormPopup";
 function Main() {
   const [isLoginFormPopupOpen, setLoginFormPopupOpen] = React.useState(false);
   const [iconMenuIsOpen, setIconMenuIsOpen] = React.useState(false);
-  const [newsCards, setNewsCards] = React.useState([]);
+
+  const getLocalStorageNewsCards = () => {
+    const lsNewsCards = localStorage.getItem("newsCards");
+    return lsNewsCards ? JSON.parse(lsNewsCards) : [];
+  };
+
+  const [newsCards, setNewsCards] = React.useState(getLocalStorageNewsCards());
   const [isSearchAreCompleted, setIsSearchAreCompleted] = React.useState();
   const [isSearchIsRunning, setIsSearchIsRunning] = React.useState();
 
@@ -21,12 +27,14 @@ function Main() {
 
   const onSearchStarted = () => {
     setIsSearchIsRunning(true);
+    setIsSearchAreCompleted(false);
   };
 
-  const onSearchCompleted = ( newsCards ) => {
+  const onSearchCompleted = (newsCards) => {
     setIsSearchIsRunning(false);
     setIsSearchAreCompleted(true);
     setNewsCards(newsCards);
+    localStorage.setItem("newsCards", JSON.stringify(newsCards));
   };
 
   //   {
@@ -50,8 +58,8 @@ function Main() {
         onSearchCompleted={onSearchCompleted}
         onSearchStarted={onSearchStarted}
       />
-      <Preloader isSearchInProgress={isSearchIsRunning} isNotFound={isSearchAreCompleted && newsCards.length === 0 } />
-      {isSearchAreCompleted && newsCards.length > 0 && (
+      <Preloader isSearchInProgress={isSearchIsRunning} isNotFound={isSearchAreCompleted && newsCards.length === 0} />
+      {newsCards.length > 0 && (
         <>
           <div className="main-search-results">
             <h4 className="main-search-results__title">Результаты поиска</h4>

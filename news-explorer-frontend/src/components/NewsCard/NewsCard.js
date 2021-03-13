@@ -15,6 +15,14 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
     if (newWindow) newWindow.opener = null;
   };
 
+  const getFormatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const locale = "ru-RU";
+    const dayMonth = date.toLocaleString(locale, { month: "long", day: "numeric" });
+    const year = date.toLocaleString(locale, { year: "numeric" });
+    return dayMonth + ", " + year;
+  };
+
   return (
     <div className="news-card" onClick={() => openInNewTab(url)}>
       <div style={{ backgroundImage: `url(${urlToImage})` }} className="news-card__image"></div>
@@ -32,7 +40,7 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
         )}
         `
       </div>
-      <p className="news-card__publishedAt">{publishedAt}</p>
+      <p className="news-card__publishedAt">{getFormatDate(publishedAt)}</p>
       <div className="news-card__content">
         <div className="news-card__title">{title}</div>
         <p className="news-card__description">{description}</p>

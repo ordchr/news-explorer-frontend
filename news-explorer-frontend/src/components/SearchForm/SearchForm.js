@@ -3,17 +3,12 @@ import "./SearchForm.css";
 import Header from "../Header/Header";
 import newsApi from "../../utils/NewsApi";
 
-function SearchForm({
-  onHeaderIconMenuClose,
-  isIconMenuOpen,
-  setIconMenuIsOpen,
-  onSearchCompleted,
-  onSearchStarted,
-}) {
-  const [newsSubject, setNewsSubject] = React.useState("Природа");
+function SearchForm({ onHeaderIconMenuClose, isIconMenuOpen, setIconMenuIsOpen, onSearchCompleted, onSearchStarted }) {
+  const [newsSubject, setNewsSubject] = React.useState(localStorage.getItem("newsSubject") || "");
 
   function handleNewsSubject(e) {
     setNewsSubject(e.target.value);
+    localStorage.setItem("newsSubject", newsSubject);
   }
 
   const handleSubmit = (e) => {
