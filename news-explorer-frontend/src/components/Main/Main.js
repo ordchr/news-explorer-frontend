@@ -37,18 +37,6 @@ function Main() {
     localStorage.setItem("newsCards", JSON.stringify(newsCards));
   };
 
-  //   {
-  //     title: "Определен новый облик российской ракеты для полетов на Луну - РИА НОВОСТИ",
-  //     urlToImage: "https://cdn23.img.ria.ru/images/sharing/article/1599529588.jpg?15215487751614643679",
-  //     publishedAt: "2021-03-02T00:08:27Z",
-  //     url: "https://ria.ru/20210302/raketa-1599529588.html",
-  //     description:
-  //       "Определен новый облик российской ракеты-носителя сверхтяжелого класса, которая может использоваться для полетов на Луну, рассказал РИА Новости источник в... РИА Новости, 02.03.2021",
-  //     sourceName: "Ria.ru",
-  //     keyword: "Природа",
-  //     actionName: "Убрать из сохраненных",
-  //   },
-
   return (
     <>
       <SearchForm
