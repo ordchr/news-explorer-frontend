@@ -42,7 +42,7 @@
   width: 14px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .bookmark__hint-to-login {
     display: none;
   }

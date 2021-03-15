@@ -1,0 +1,65 @@
+.info-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  -webkit-transition: visibility 0.2s, opacity 0.2s linear;
+  -moz-transition: visibility 0.2s, opacity 0.2s linear;
+  -o-transition: visibility 0.2s, opacity 0.2s linear;
+  transition: visibility 0.2s, opacity 0.2s linear;
+  display: flex;
+}
+
+.info-tooltip_opened {
+  visibility: visible;
+}
+
+.info-tooltip_closed {
+  visibility: hidden;
+}
+
+.info-tooltip__container {
+  width: 430px;
+  height: 182px;
+  background-color: #fff;
+  display: flex;
+  border-radius: 10px;
+  flex-direction: column;
+  position: relative;
+}
+
+.info-tooltip__message {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 28px;
+  margin: 43px 79px 0 38px;
+}
+
+.info-tooltip__link {
+  font-family: "Inter", "Arial", "sans-serif";;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  margin: 14px 79px 0 38px;
+}
+
+.info-tooltip__button-close {
+  background-image: url(../../images/popup/close.svg);
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  top: -35px;
+  right: -35px;
+  position: absolute;
+  cursor: pointer;
+}

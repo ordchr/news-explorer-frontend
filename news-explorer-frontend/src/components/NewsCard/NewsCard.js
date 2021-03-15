@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./NewsCard.css";
 import Bookmark from "../Bookmark/Bookmark";
 import DeleteButton from "../DeleteButton/DeleteButton";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import mainApi from "../../utils/MainApi";
 
 function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
-  const { url, title, urlToImage, description, publishedAt, sourceName, keyword } = newsCard;
+  const { url, title, urlToImage, description, publishedAt, sourceName, keyword, isMarked } = newsCard;
+
+  const currentUser = React.useContext(CurrentUserContext);
 
   function label_keyword({ keyword }) {
     return <h6 className="news-card__keyword">{keyword}</h6>;
@@ -23,6 +27,23 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
     return dayMonth + ", " + year;
   };
 
+  const [isSaved, setIsSaved] = useState();
+
+  const handleBookmarkClick = () => {
+    if (!currentUser.loggedIn) {
+      return;
+    }
+    // mainApi
+    //   .createArticle(newsCard)
+    //   .then((newsCard) => {
+    //     setCards([...cards, newCard]);
+    //     closeAllPopups();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
+
   return (
     <div className="news-card" onClick={() => openInNewTab(url)}>
       <div style={{ backgroundImage: `url(${urlToImage})` }} className="news-card__image"></div>
@@ -31,7 +52,7 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
         `
         {isMainPage ? (
           <div className="news-card__action">
-            <Bookmark type={"normal"} isLoggedIn={isLoggedIn} />
+            <Bookmark isMarked={newsCard.isMarked} isLoggedIn={currentUser.loggedIn} onBookmarkClick={handleBookmarkClick} />
           </div>
         ) : (
           <div className="news-card__action">

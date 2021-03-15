@@ -1,9 +1,20 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 // import FormValidator from '../utils/FormValidator';
 import "./PopupWithForm.css";
 import { Link } from "react-router-dom";
 
-function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, children }) {
+function PopupWithForm({
+  title,
+  name,
+  isOpen,
+  onClose,
+  onSubmit,
+  isEnter,
+  children,
+  onAlternateEnterClick,
+  onAlternateRegisterClick,
+  errorMessage,
+}) {
   // useEffect(() => {
 
   //   const validateOptions = {
@@ -28,6 +39,12 @@ function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, childr
     },
     [onClose]
   );
+
+  const [isFormFieldValidated, setisFormFieldValidated] = useState(true);
+
+  const cssMainButton = `popup__button-save ${
+    isFormFieldValidated ? "popup__button-save_filled" : "popup__button-save_unfilled"
+  }`;
 
   useEffect(() => {
     window.addEventListener("keydown", handleUserKeyPress, false);
@@ -54,7 +71,14 @@ function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, childr
         >
           <h4 className="popup__header">{title}</h4>
           {children}
-          <button className="popup__button-save popup__button-save_filled" type="submit">
+          <h5
+            className={`popup__error-message ${
+              errorMessage ? "popup__error-message_visible" : "popup__error-message_hidden"
+            }`}
+          >
+            {errorMessage}
+          </h5>
+          <button className={cssMainButton} type="submit" disabled={!isFormFieldValidated}>
             {isEnter ? "Войти" : "Зарегистрироваться"}
           </button>
         </form>
@@ -62,11 +86,11 @@ function PopupWithForm({ title, name, isOpen, onClose, onSubmit, isEnter, childr
         <h5 className="popup__footer">
           или{" "}
           {isEnter ? (
-            <Link to="/sign-in" className="popup__footer-link">
+            <Link className="popup__footer-link" onClick={onAlternateRegisterClick}>
               Зарегистрироваться
             </Link>
           ) : (
-            <Link to="/sign-in" className="popup__footer-link">
+            <Link className="popup__footer-link" onClick={onAlternateEnterClick}>
               Войти
             </Link>
           )}

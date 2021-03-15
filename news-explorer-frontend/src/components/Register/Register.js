@@ -1,26 +1,32 @@
-import React from "react";
-import "./LoginFormPopup.css";
+import React, { useRef } from "react";
+import "./Register.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-function LoginFormPopup({ isOpen, onClose, onUpdateAvatar }) {
-  // const avatarRef = useRef();
+function Register({ isOpen, onClose, onRegisterUser, onAlternateEnterClick, errorMessage }) {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const userNameRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onUpdateAvatar({
-      // avatarLink: avatarRef.current.value
+    onRegisterUser({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+      name: userNameRef.current.value,
     });
   };
 
   return (
     <PopupWithForm
-      title="Вход"
-      name="update-avatar"
+      title="Регистрация"
+      name="user-register"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isEnter={true}
+      isEnter={false}
+      onAlternateEnterClick={onAlternateEnterClick}
+      errorMessage={errorMessage}
     >
       <label className="popup__input-label">
         Email:
@@ -31,7 +37,7 @@ function LoginFormPopup({ isOpen, onClose, onUpdateAvatar }) {
           type="email"
           placeholder="Введите почту"
           required
-          // ref={avatarRef}
+          ref={emailRef}
         />
       </label>
       <span id="popup-input-email-error" className="popup__input-error" />
@@ -44,12 +50,24 @@ function LoginFormPopup({ isOpen, onClose, onUpdateAvatar }) {
           type="password"
           placeholder="Введите пароль"
           required
-          // ref={avatarRef}
+          ref={passwordRef}
         />
       </label>
       <span id="popup-input-password-error" className="popup__input-error" />
+      <label className="popup__input-label">
+        Имя:
+        <input
+          id="popup-input-name"
+          className="popup__input"
+          name="popup-input-name"
+          type="text"
+          placeholder="Введите своё имя"
+          required
+          ref={userNameRef}
+        />
+      </label>
     </PopupWithForm>
   );
 }
 
-export default LoginFormPopup;
+export default Register;
