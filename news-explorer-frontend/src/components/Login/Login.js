@@ -1,15 +1,17 @@
-import React from "react";
+import React, {useRef} from "react";
 import "./Login.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-function Login({ isOpen, onClose, onUpdateAvatar, onAlternateRegisterClick }) {
-  // const avatarRef = useRef();
+function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onUpdateAvatar({
-      // avatarLink: avatarRef.current.value
+    onLoginUser({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
     });
   };
 
@@ -32,7 +34,7 @@ function Login({ isOpen, onClose, onUpdateAvatar, onAlternateRegisterClick }) {
           type="email"
           placeholder="Введите почту"
           required
-          // ref={avatarRef}
+          ref={emailRef}
         />
       </label>
       <span id="popup-input-email-error" className="popup__input-error" />
@@ -45,7 +47,7 @@ function Login({ isOpen, onClose, onUpdateAvatar, onAlternateRegisterClick }) {
           type="password"
           placeholder="Введите пароль"
           required
-          // ref={avatarRef}
+          ref={passwordRef}
         />
       </label>
       <span id="popup-input-password-error" className="popup__input-error" />

@@ -4,9 +4,8 @@ import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 import { useLocation } from "react-router-dom";
 import { mainPageUrl } from "../../utils/constants";
-import mainApi from "../../utils/MainApi";
 
-function NewsCardList({ newsCards }) {
+function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards }) {
   const location = useLocation();
   const [showedRows, setShowedRows] = React.useState(1);
   const [cardsInRow, setCardsInRow] = React.useState(3);
@@ -17,26 +16,17 @@ function NewsCardList({ newsCards }) {
     setShowedRows(showedRows + 1);
   };
 
-  useEffect(() => {
-    mainApi
-      .getArticles()
-      .then((articles) => {
-        for (const article of articles) {
-          if (article.url === newsCards.url) {
-            newsCards.isSaved = true;
-          }
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [newsCards]);
-
   return (
     <section className="news-card-list">
       <div className="news-card-list__cards" ref={newsCardsList}>
         {newsCards.slice(0, showedRows * cardsInRow).map((newsCard, index) => (
-          <NewsCard newsCard={newsCard} key={index} isMainPage={location.pathname === mainPageUrl} />
+          <NewsCard
+            newsCard={newsCard}
+            key={index}
+            isMainPage={location.pathname === mainPageUrl}
+            bookmarkedNewsCards={bookmarkedNewsCards}
+            setBookmarkedNewsCards={setBookmarkedNewsCards}
+          />
         ))}
       </div>
       <div className="news-card-list__show-more-button">

@@ -37,7 +37,7 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
           <Switch>
             <Route exact path="/">
-              <Main />
+              <Main setCurrentUser={setCurrentUser} />
             </Route>
             <Route path="/ui">
               <UI />

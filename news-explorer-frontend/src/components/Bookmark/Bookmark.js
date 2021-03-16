@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Bookmark.css";
 import icon_normal from "../../images/bookmark_normal.svg";
 import icon_hover from "../../images/bookmark_hover.svg";
@@ -6,22 +6,42 @@ import icon_marked from "../../images/bookmark_marked.svg";
 
 function Bookmark({ isMarked, isLoggedIn, onBookmarkClick }) {
   const [toShowHint, setToShowHint] = React.useState(false);
+
+  const getSignificantSrc = (isLoggedIn, isMarked) => {
+    // console.log('isLoggedIn', isLoggedIn);
+    // console.log('isMarked', isMarked);
+    if (isLoggedIn && isMarked) {
+      return icon_marked;
+    }
+    return icon_normal;
+  };
+
   const [src, setSrc] = React.useState(icon_normal);
 
-  const handleMouseHover = () => {
-    if (isLoggedIn) {
-      if (isMarked) {
-        setSrc( icon_marked );
-      } else {
-        setSrc( icon_hover );
-      }
+  useEffect(() => {
+    if (isMarked) {
+      setSrc(icon_marked);
     } else {
-      setSrc( icon_normal );
-      setToShowHint(!toShowHint);
+      setSrc(icon_normal);
+    }
+  }, [isMarked]);
+
+  const handleMouseEnter = () => {
+    if (!isLoggedIn) {
+      setSrc(icon_hover);
+      setToShowHint(true);
     }
   };
 
-  const handleBookmarkClick = () => {
+  const handleMouseLeave = () => {
+    if (!isLoggedIn) {
+      setSrc(icon_normal);
+    }
+    setToShowHint(false);
+  };
+
+  const handleBookmarkClick = (e) => {
+    e.stopPropagation();
     onBookmarkClick();
   };
 
@@ -36,8 +56,8 @@ function Bookmark({ isMarked, isLoggedIn, onBookmarkClick }) {
       `
       <div
         className="bookmark__button"
-        onMouseEnter={handleMouseHover}
-        onMouseLeave={handleMouseHover}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         onClick={handleBookmarkClick}
       >
         <img src={src} className="bookmark__image" alt="Pic" disabled onClick={handleBookmarkClick} />

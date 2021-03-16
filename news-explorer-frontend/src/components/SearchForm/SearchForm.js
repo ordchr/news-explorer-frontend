@@ -3,7 +3,15 @@ import "./SearchForm.css";
 import Header from "../Header/Header";
 import newsApi from "../../utils/NewsApi";
 
-function SearchForm({ onHeaderIconMenuClose, isIconMenuOpen, setIconMenuIsOpen, onSearchCompleted, onSearchStarted, onAuthorizeClick }) {
+function SearchForm({
+  onHeaderIconMenuClose,
+  isIconMenuOpen,
+  setIconMenuIsOpen,
+  onSearchCompleted,
+  onSearchStarted,
+  onAuthorizeClick,
+  onSignOut,
+}) {
   const [newsSubject, setNewsSubject] = React.useState(localStorage.getItem("newsSubject") || "");
 
   function handleNewsSubject(e) {
@@ -45,6 +53,7 @@ function SearchForm({ onHeaderIconMenuClose, isIconMenuOpen, setIconMenuIsOpen, 
         setIconMenuIsOpen={setIconMenuIsOpen}
         onHeaderIconMenuClose={onHeaderIconMenuClose}
         onAuthorizeClick={onAuthorizeClick}
+        onSignOut={onSignOut}
       />
 
       <div className="search-form-head">

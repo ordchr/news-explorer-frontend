@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
@@ -10,12 +10,16 @@ import Register from "../Register/Register";
 import mainApi from "../../utils/MainApi";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { useHistory } from "react-router";
 
-function Main() {
+function Main({ setCurrentUser }) {
+  const history = useHistory();
+
   const currentUser = React.useContext(CurrentUserContext);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   const [isLoginPopupOpen, setLoginPopupOpen] = React.useState(false);
-  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(true);
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [registerErrorMessage, setRegisterErrorMessage] = React.useState("");
 
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
@@ -28,6 +32,7 @@ function Main() {
   };
 
   const [newsCards, setNewsCards] = React.useState(getLocalStorageNewsCards());
+  const [bookmarkedNewsCards, setBookmarkedNewsCards] = React.useState([]);
   const [isSearchAreCompleted, setIsSearchAreCompleted] = React.useState();
   const [isSearchIsRunning, setIsSearchIsRunning] = React.useState();
 
@@ -64,7 +69,6 @@ function Main() {
     mainApi
       .registerUser(userData)
       .then((_) => {
-        currentUser.loggedIn = true;
         closeAllPopups();
         setIsInfoTooltipOpen(true);
       })
@@ -78,9 +82,62 @@ function Main() {
           setRegisterErrorMessage("Такой пользователь уже существует");
           console.log("Такой пользователь уже существует");
         }
-        currentUser.loggedIn = false;
       });
   };
+
+  const handleLoginUser = (userData) => {
+    mainApi
+      .login(userData)
+      .then((resLogin) => {
+        console.log(resLogin);
+        setLoggedIn(true);
+        localStorage.setItem("jwt", resLogin["token"]);
+        closeAllPopups();
+        setCurrentUser({
+          loggedIn: true,
+          email: userData.email,
+        });
+        // setEmail(authData["email"]);
+        // history.push('/');
+      })
+      .catch((err) => {
+        console.log(`Ошибка запроса к API. Код ошибки: ${err.status}`);
+        if (err.status === 400) {
+          console.log("Не передано одно из полей ");
+          setRegisterErrorMessage("Не передано одно из полей ");
+        } else if (err.status === 401) {
+          console.log("Пользователь с email не найден");
+          setRegisterErrorMessage("Пользователь с email не найден");
+        }
+      });
+  };
+
+  function onSignOut() {
+    setCurrentUser({});
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    history.push("/");
+  }
+
+  useEffect(() => {
+    mainApi
+      .getArticles()
+      .then((articles) => {
+        console.log(articles);
+        const hashArticles = articles.reduce((obj, item) => {
+          return {
+            [item["link"]]: item._id,
+          };
+        }, {});
+        setBookmarkedNewsCards(hashArticles);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally((_) => {
+        console.log(bookmarkedNewsCards);
+      });
+  }, []);
 
   return (
     <>
@@ -91,6 +148,7 @@ function Main() {
         onSearchCompleted={onSearchCompleted}
         onSearchStarted={onSearchStarted}
         onAuthorizeClick={handleAuthorizeClick}
+        onSignOut={onSignOut}
       />
       <Preloader isSearchInProgress={isSearchIsRunning} isNotFound={isSearchAreCompleted && newsCards.length === 0} />
       {newsCards.length > 0 && (
@@ -98,7 +156,7 @@ function Main() {
           <div className="main-search-results">
             <h4 className="main-search-results__title">Результаты поиска</h4>
             <div className="main-search-results__cards">
-              <NewsCardList newsCards={newsCards} />
+              <NewsCardList newsCards={newsCards} bookmarkedNewsCards={bookmarkedNewsCards} setBookmarkedNewsCards={setBookmarkedNewsCards}/>
             </div>
           </div>
         </>
@@ -106,7 +164,12 @@ function Main() {
       <About />
       <Footer />
 
-      <Login isOpen={isLoginPopupOpen} onClose={closeAllPopups} onAlternateRegisterClick={handleRegisterClick} />
+      <Login
+        isOpen={isLoginPopupOpen}
+        onClose={closeAllPopups}
+        onAlternateRegisterClick={handleRegisterClick}
+        onLoginUser={handleLoginUser}
+      />
       <Register
         isOpen={isRegisterPopupOpen}
         onClose={closeAllPopups}

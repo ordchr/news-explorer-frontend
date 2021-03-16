@@ -5,15 +5,11 @@ import iconMenuWhite from "../../images/icon_menu.svg";
 import iconMenuBlack from "../../images/icon_menu_black.svg";
 import iconMenuCloseWhite from "../../images/icon_menu_close.svg";
 import iconMenuCloseBlack from "../../images/icon_menu_close_black.svg";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Header({
-  isLoggedIn,
-  isMainPage,
-  isIconMenuOpen,
-  setIconMenuIsOpen,
-  onHeaderIconMenuClose,
-  onAuthorizeClick,
-}) {
+function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMenuClose, onAuthorizeClick, onSignOut }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
   const headerNavLinkCSS = `header__nav-link ${
     isMainPage ? "header__nav-link_main-page" : "header__nav-link_saved-news-page"
   }`;
@@ -40,7 +36,7 @@ function Header({
         <NavLink exact to="/" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
           Главная
         </NavLink>
-        {isLoggedIn ? (
+        {currentUser.loggedIn ? (
           <>
             <NavLink exact to="/saved-news" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
               Сохраненные статьи
@@ -55,6 +51,7 @@ function Header({
               className={`header__nav-link-logout header__nav-link-logout_basic-menu ${
                 isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
               }`}
+              onClick={onSignOut}
             >
               Грета
             </div>
@@ -104,7 +101,7 @@ function Header({
             Главная
           </NavLink>
 
-          {isLoggedIn ? (
+          {currentUser.loggedIn ? (
             <>
               <NavLink exact to="/saved-news" className={headerIconMenuNavLinkCSS}>
                 Сохраненные статьи
@@ -114,6 +111,7 @@ function Header({
                 className={`header__nav-link-logout ${
                   isMainPage ? "header__nav-link-logout_main-page" : "header__nav-link-logout_saved-news"
                 } `}
+                onClick={onSignOut}
               >
                 Грета
               </div>

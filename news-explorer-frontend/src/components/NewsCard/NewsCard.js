@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import "./NewsCard.css";
 import Bookmark from "../Bookmark/Bookmark";
 import DeleteButton from "../DeleteButton/DeleteButton";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import mainApi from "../../utils/MainApi";
 
-function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
-  const { url, title, urlToImage, description, publishedAt, sourceName, keyword, isMarked } = newsCard;
+function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBookmarkedNewsCards }) {
+  const { url, title, urlToImage, description, publishedAt, sourceName, keyword } = newsCard;
 
+  console.log();
   const currentUser = React.useContext(CurrentUserContext);
+  const [bookmarkArticleId, setBookmarkArticleId] = useState(false);
 
   function label_keyword({ keyword }) {
     return <h6 className="news-card__keyword">{keyword}</h6>;
@@ -27,21 +29,50 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
     return dayMonth + ", " + year;
   };
 
-  const [isSaved, setIsSaved] = useState();
+  useLayoutEffect(() => {
+    if (url in bookmarkedNewsCards) {
+      console.log('bookmark');
+      setBookmarkArticleId(bookmarkedNewsCards[url]);
+    }
+  }, [bookmarkedNewsCards, url]);
 
   const handleBookmarkClick = () => {
     if (!currentUser.loggedIn) {
       return;
     }
-    // mainApi
-    //   .createArticle(newsCard)
-    //   .then((newsCard) => {
-    //     setCards([...cards, newCard]);
-    //     closeAllPopups();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    if (bookmarkArticleId) {
+      mainApi
+        .deleteArticle(bookmarkArticleId)
+        .then(_ => {
+          setBookmarkArticleId();
+          const newList = Object.assign({}, bookmarkedNewsCards);
+          delete newList[url];
+          setBookmarkedNewsCards(newList);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      const reqBody = {
+        keyword: keyword,
+        title: title,
+        text: description,
+        date: publishedAt,
+        source: sourceName,
+        link: url,
+        image: urlToImage,
+      };
+      console.log(reqBody);
+      mainApi
+        .createArticle(reqBody)
+        .then((newsCard) => {
+          console.log(newsCard);
+          setBookmarkArticleId(newsCard._id);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -52,7 +83,7 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage }) {
         `
         {isMainPage ? (
           <div className="news-card__action">
-            <Bookmark isMarked={newsCard.isMarked} isLoggedIn={currentUser.loggedIn} onBookmarkClick={handleBookmarkClick} />
+            <Bookmark isMarked={bookmarkArticleId} isLoggedIn={currentUser.loggedIn} onBookmarkClick={handleBookmarkClick} />
           </div>
         ) : (
           <div className="news-card__action">
