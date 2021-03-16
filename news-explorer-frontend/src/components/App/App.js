@@ -32,18 +32,29 @@ function App() {
     }
   }, [history]);
 
+  function onSignOut() {
+    setCurrentUser({});
+    localStorage.removeItem("jwt");
+    history.push("/");
+  }
+
   return (
     <div className="page">
       <div className="page__section">
         <CurrentUserContext.Provider value={currentUser}>
           <Switch>
             <Route exact path="/">
-              <Main setCurrentUser={setCurrentUser} />
+              <Main setCurrentUser={setCurrentUser} onSignOut={onSignOut} />
             </Route>
             <Route path="/ui">
               <UI />
             </Route>
-            <ProtectedRoute path="/saved-news" component={SavedNews} loggedIn={currentUser.loggedIn}></ProtectedRoute>
+            <ProtectedRoute
+              path="/saved-news"
+              component={SavedNews}
+              loggedIn={currentUser.loggedIn}
+              onSignOut={onSignOut}
+            ></ProtectedRoute>
           </Switch>
         </CurrentUserContext.Provider>
       </div>

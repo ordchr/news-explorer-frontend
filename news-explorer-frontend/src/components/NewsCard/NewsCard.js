@@ -5,7 +5,14 @@ import DeleteButton from "../DeleteButton/DeleteButton";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import mainApi from "../../utils/MainApi";
 
-function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBookmarkedNewsCards }) {
+function NewsCard({
+  newsCard,
+  isLoggedIn,
+  isMainPage,
+  bookmarkedNewsCards,
+  setBookmarkedNewsCards,
+  setIsRegisterPopupOpen,
+}) {
   const { url, title, urlToImage, description, publishedAt, sourceName, keyword } = newsCard;
 
   console.log(urlToImage);
@@ -41,6 +48,7 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBo
 
   const handleBookmarkClick = () => {
     if (!currentUser.loggedIn) {
+      setIsRegisterPopupOpen(true);
       return;
     }
     if (bookmarkArticleId) {

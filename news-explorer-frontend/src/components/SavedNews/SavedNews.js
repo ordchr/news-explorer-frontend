@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import mainApi from "../../utils/MainApi";
 
-function SavedNews() {
+function SavedNews({ onSignOut }) {
   // const [newsCards, setNewsCards] = React.useState();
 
   const [savedNewsCards, setSavedNewsCards] = React.useState([]);
@@ -75,7 +75,7 @@ function SavedNews() {
 
   return (
     <>
-      <Header isLoggedIn={true} />
+      <Header isLoggedIn={true} onSignOut={onSignOut}/>
       <div className="saved-news">
         <h4 className="saved-news__caption">Сохранённые статьи</h4>
         <h1 className="saved-news__title">Грета, у вас {countSavedNewsCards} сохранённых статей</h1>

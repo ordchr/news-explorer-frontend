@@ -11,12 +11,12 @@ import Register from "../Register/Register";
 import mainApi from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
-function Main({ setCurrentUser }) {
+function Main({ setCurrentUser, onSignOut }) {
   const history = useHistory();
   const [isLoginPopupOpen, setLoginPopupOpen] = React.useState();
 
   React.useEffect(() => {
-    if (history.location.state.isLoginOpen) {
+    if (history.location.state?.isLoginOpen) {
       setLoginPopupOpen(true);
     }
     history.replace("/", {});
@@ -114,11 +114,6 @@ function Main({ setCurrentUser }) {
       });
   };
 
-  function onSignOut() {
-    setCurrentUser({});
-    localStorage.removeItem("jwt");
-    history.push("/");
-  }
 
   useEffect(() => {
     mainApi
@@ -161,6 +156,7 @@ function Main({ setCurrentUser }) {
                 newsCards={newsCards}
                 bookmarkedNewsCards={bookmarkedNewsCards}
                 setBookmarkedNewsCards={setBookmarkedNewsCards}
+                setIsRegisterPopupOpen={setIsRegisterPopupOpen}
               />
             </div>
           </div>

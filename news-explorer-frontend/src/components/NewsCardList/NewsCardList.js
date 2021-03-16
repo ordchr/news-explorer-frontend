@@ -5,7 +5,7 @@ import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 import { useLocation } from "react-router-dom";
 import { mainPageUrl } from "../../utils/constants";
 
-function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards }) {
+function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards, setIsRegisterPopupOpen }) {
   const location = useLocation();
   const [showedRows, setShowedRows] = React.useState(1);
   const [cardsInRow, setCardsInRow] = React.useState(3);
@@ -26,6 +26,7 @@ function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards }
             isMainPage={location.pathname === mainPageUrl}
             bookmarkedNewsCards={bookmarkedNewsCards}
             setBookmarkedNewsCards={setBookmarkedNewsCards}
+            setIsRegisterPopupOpen={setIsRegisterPopupOpen}
           />
         ))}
       </div>
