@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router";
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
@@ -9,12 +10,18 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import mainApi from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { useHistory } from "react-router";
 
 function Main({ setCurrentUser }) {
   const history = useHistory();
+  const [isLoginPopupOpen, setLoginPopupOpen] = React.useState();
 
-  const [isLoginPopupOpen, setLoginPopupOpen] = React.useState(false);
+  React.useEffect(() => {
+    if (history.location.state.isLoginOpen) {
+      setLoginPopupOpen(true);
+    }
+    history.replace("/", {});
+  }, [history]);
+
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [registerErrorMessage, setRegisterErrorMessage] = React.useState("");
 
@@ -150,7 +157,11 @@ function Main({ setCurrentUser }) {
           <div className="main-search-results">
             <h4 className="main-search-results__title">Результаты поиска</h4>
             <div className="main-search-results__cards">
-              <NewsCardList newsCards={newsCards} bookmarkedNewsCards={bookmarkedNewsCards} setBookmarkedNewsCards={setBookmarkedNewsCards}/>
+              <NewsCardList
+                newsCards={newsCards}
+                bookmarkedNewsCards={bookmarkedNewsCards}
+                setBookmarkedNewsCards={setBookmarkedNewsCards}
+              />
             </div>
           </div>
         </>
