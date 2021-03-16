@@ -7,15 +7,6 @@ import icon_marked from "../../images/bookmark_marked.svg";
 function Bookmark({ isMarked, isLoggedIn, onBookmarkClick }) {
   const [toShowHint, setToShowHint] = React.useState(false);
 
-  const getSignificantSrc = (isLoggedIn, isMarked) => {
-    // console.log('isLoggedIn', isLoggedIn);
-    // console.log('isMarked', isMarked);
-    if (isLoggedIn && isMarked) {
-      return icon_marked;
-    }
-    return icon_normal;
-  };
-
   const [src, setSrc] = React.useState(icon_normal);
 
   useEffect(() => {

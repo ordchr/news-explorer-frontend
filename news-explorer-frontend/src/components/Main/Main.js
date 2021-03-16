@@ -8,15 +8,11 @@ import NewsCardList from "../NewsCardList/NewsCardList";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import mainApi from "../../utils/MainApi";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { useHistory } from "react-router";
 
 function Main({ setCurrentUser }) {
   const history = useHistory();
-
-  const currentUser = React.useContext(CurrentUserContext);
-  const [loggedIn, setLoggedIn] = React.useState(false);
 
   const [isLoginPopupOpen, setLoginPopupOpen] = React.useState(false);
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
@@ -32,7 +28,7 @@ function Main({ setCurrentUser }) {
   };
 
   const [newsCards, setNewsCards] = React.useState(getLocalStorageNewsCards());
-  const [bookmarkedNewsCards, setBookmarkedNewsCards] = React.useState([]);
+  const [bookmarkedNewsCards, setBookmarkedNewsCards] = React.useState({});
   const [isSearchAreCompleted, setIsSearchAreCompleted] = React.useState();
   const [isSearchIsRunning, setIsSearchIsRunning] = React.useState();
 
@@ -90,7 +86,6 @@ function Main({ setCurrentUser }) {
       .login(userData)
       .then((resLogin) => {
         console.log(resLogin);
-        setLoggedIn(true);
         localStorage.setItem("jwt", resLogin["token"]);
         closeAllPopups();
         setCurrentUser({
@@ -114,7 +109,6 @@ function Main({ setCurrentUser }) {
 
   function onSignOut() {
     setCurrentUser({});
-    setLoggedIn(false);
     localStorage.removeItem("jwt");
     history.push("/");
   }

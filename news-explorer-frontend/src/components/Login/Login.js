@@ -28,7 +28,7 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
       <label className="popup__input-label">
         Email:
         <input
-          id="popup-input-email"
+          id="popup-login-input-email"
           className="popup__input"
           name="popup-input-email"
           type="email"
@@ -37,11 +37,11 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
           ref={emailRef}
         />
       </label>
-      <span id="popup-input-email-error" className="popup__input-error" />
+      <span id="popup-login-input-email-error" className="popup__input-error" />
       <label className="popup__input-label">
         Пароль
         <input
-          id="popup-input-password"
+          id="popup-login-input-password"
           className="popup__input"
           name="popup-input-password"
           type="password"
@@ -50,7 +50,7 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
           ref={passwordRef}
         />
       </label>
-      <span id="popup-input-password-error" className="popup__input-error" />
+      <span id="popup-login-input-password-error" className="popup__input-error" />
     </PopupWithForm>
   );
 }

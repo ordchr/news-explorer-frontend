@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import "./NewsCard.css";
 import Bookmark from "../Bookmark/Bookmark";
 import DeleteButton from "../DeleteButton/DeleteButton";
@@ -8,9 +8,9 @@ import mainApi from "../../utils/MainApi";
 function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBookmarkedNewsCards }) {
   const { url, title, urlToImage, description, publishedAt, sourceName, keyword } = newsCard;
 
-  console.log();
+  console.log(urlToImage);
   const currentUser = React.useContext(CurrentUserContext);
-  const [bookmarkArticleId, setBookmarkArticleId] = useState(false);
+  const [bookmarkArticleId, setBookmarkArticleId] = useState();
 
   function label_keyword({ keyword }) {
     return <h6 className="news-card__keyword">{keyword}</h6>;
@@ -30,9 +30,12 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBo
   };
 
   useLayoutEffect(() => {
+    console.log(bookmarkedNewsCards);
+    console.log(url);
     if (url in bookmarkedNewsCards) {
-      console.log('bookmark');
+      console.log("bookmark");
       setBookmarkArticleId(bookmarkedNewsCards[url]);
+      console.log(bookmarkArticleId);
     }
   }, [bookmarkedNewsCards, url]);
 
@@ -43,7 +46,7 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBo
     if (bookmarkArticleId) {
       mainApi
         .deleteArticle(bookmarkArticleId)
-        .then(_ => {
+        .then((_) => {
           setBookmarkArticleId();
           const newList = Object.assign({}, bookmarkedNewsCards);
           delete newList[url];
@@ -75,19 +78,41 @@ function NewsCard({ newsCard, isLoggedIn, isMainPage, bookmarkedNewsCards, setBo
     }
   };
 
+  const handleDeleteClick = () => {
+    if (!currentUser.loggedIn) {
+      return;
+    }
+    console.log(bookmarkArticleId);
+    mainApi
+      .deleteArticle(bookmarkArticleId)
+      .then((_) => {
+        setBookmarkArticleId();
+        const newList = Object.assign({}, bookmarkedNewsCards);
+        delete newList[url];
+        setBookmarkedNewsCards(newList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="news-card" onClick={() => openInNewTab(url)}>
       <div style={{ backgroundImage: `url(${urlToImage})` }} className="news-card__image"></div>
-      {keyword && label_keyword({ keyword })}
+      {!isMainPage && keyword && label_keyword({ keyword })}
       <div className="news-card__top-panel">
         `
         {isMainPage ? (
           <div className="news-card__action">
-            <Bookmark isMarked={bookmarkArticleId} isLoggedIn={currentUser.loggedIn} onBookmarkClick={handleBookmarkClick} />
+            <Bookmark
+              isMarked={bookmarkArticleId}
+              isLoggedIn={currentUser.loggedIn}
+              onBookmarkClick={handleBookmarkClick}
+            />
           </div>
         ) : (
           <div className="news-card__action">
-            <DeleteButton />
+            <DeleteButton onDeleteClick={handleDeleteClick} />
           </div>
         )}
         `

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
