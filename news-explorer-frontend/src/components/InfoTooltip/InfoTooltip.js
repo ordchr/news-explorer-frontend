@@ -9,7 +9,7 @@ function InfoTooltip({ isOpen, onCloseHangle, onLoginLinkClick }) {
         <h4 className="info-tooltip__message">
           Пользователь успешно зарегистрирован!
         </h4>
-        <Link className="info-tooltip__link" onClick={onLoginLinkClick}>
+        <Link className="info-tooltip__link" to="/" onClick={onLoginLinkClick}>
           Войти
         </Link>
         <button type="button" className="info-tooltip__button-close" onClick={onCloseHangle} />

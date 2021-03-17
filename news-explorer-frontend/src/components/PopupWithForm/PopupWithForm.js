@@ -86,11 +86,11 @@ function PopupWithForm({
         <h5 className="popup__footer">
           или{" "}
           {isEnter ? (
-            <Link className="popup__footer-link" onClick={onAlternateRegisterClick}>
+            <Link className="popup__footer-link" to="/" onClick={onAlternateRegisterClick}>
               Зарегистрироваться
             </Link>
           ) : (
-            <Link className="popup__footer-link" onClick={onAlternateEnterClick}>
+            <Link className="popup__footer-link" to="/" onClick={onAlternateEnterClick}>
               Войти
             </Link>
           )}
