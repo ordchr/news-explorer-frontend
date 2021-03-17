@@ -13,6 +13,10 @@ function App() {
   const history = useHistory();
 
   const [currentUser, setCurrentUser] = React.useState({});
+  const [iconMenuIsOpen, setIconMenuIsOpen] = React.useState(false);
+  const [isLoginPopupOpen, setLoginPopupOpen] = React.useState();
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (localStorage.getItem("jwt")) {
@@ -38,13 +42,32 @@ function App() {
     history.push("/");
   }
 
+  function closeAllPopups() {
+    setLoginPopupOpen(false);
+    setIsRegisterPopupOpen(false);
+    setIconMenuIsOpen(false);
+    setIsInfoTooltipOpen(false);
+  }
+
   return (
     <div className="page">
       <div className="page__section">
         <CurrentUserContext.Provider value={currentUser}>
           <Switch>
             <Route exact path="/">
-              <Main setCurrentUser={setCurrentUser} onSignOut={onSignOut} />
+              <Main
+                setCurrentUser={setCurrentUser}
+                onSignOut={onSignOut}
+                iconMenuIsOpen={iconMenuIsOpen}
+                setIconMenuIsOpen={setIconMenuIsOpen}
+                closeAllPopups={closeAllPopups}
+                isLoginPopupOpen={isLoginPopupOpen}
+                setLoginPopupOpen={setLoginPopupOpen}
+                isRegisterPopupOpen={isRegisterPopupOpen}
+                setIsRegisterPopupOpen={setIsRegisterPopupOpen}
+                isInfoTooltipOpen={isInfoTooltipOpen}
+                setIsInfoTooltipOpen={setIsInfoTooltipOpen}
+              />
             </Route>
             <Route path="/ui">
               <UI />
@@ -54,6 +77,9 @@ function App() {
               component={SavedNews}
               loggedIn={currentUser.loggedIn}
               onSignOut={onSignOut}
+              iconMenuIsOpen={iconMenuIsOpen}
+              setIconMenuIsOpen={setIconMenuIsOpen}
+              onHeaderIconMenuClose={closeAllPopups}
             ></ProtectedRoute>
           </Switch>
         </CurrentUserContext.Provider>

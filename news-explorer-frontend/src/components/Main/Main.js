@@ -12,10 +12,21 @@ import mainApi from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function Main({ setCurrentUser, onSignOut }) {
+function Main({
+  setCurrentUser,
+  onSignOut,
+  iconMenuIsOpen,
+  setIconMenuIsOpen,
+  closeAllPopups,
+  isLoginPopupOpen,
+  setLoginPopupOpen,
+  isRegisterPopupOpen,
+  setIsRegisterPopupOpen,
+  isInfoTooltipOpen,
+  setIsInfoTooltipOpen,
+}) {
   const currentUser = React.useContext(CurrentUserContext);
   const history = useHistory();
-  const [isLoginPopupOpen, setLoginPopupOpen] = React.useState();
 
   React.useEffect(() => {
     if (history.location.state?.isLoginOpen) {
@@ -24,12 +35,7 @@ function Main({ setCurrentUser, onSignOut }) {
     history.replace("/", {});
   }, [history]);
 
-  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
   const [registerErrorMessage, setRegisterErrorMessage] = React.useState("");
-
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
-
-  const [iconMenuIsOpen, setIconMenuIsOpen] = React.useState(false);
 
   const getLocalStorageNewsCards = () => {
     const lsNewsCards = localStorage.getItem("newsCards");
@@ -40,13 +46,6 @@ function Main({ setCurrentUser, onSignOut }) {
   const [bookmarkedNewsCards, setBookmarkedNewsCards] = React.useState({});
   const [isSearchAreCompleted, setIsSearchAreCompleted] = React.useState();
   const [isSearchIsRunning, setIsSearchIsRunning] = React.useState();
-
-  function closeAllPopups() {
-    setLoginPopupOpen(false);
-    setIsRegisterPopupOpen(false);
-    setIconMenuIsOpen(false);
-    setIsInfoTooltipOpen(false);
-  }
 
   const onSearchStarted = () => {
     setIsSearchIsRunning(true);

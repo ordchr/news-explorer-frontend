@@ -1,12 +1,21 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router";
 import "./SavedNews.css";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import mainApi from "../../utils/MainApi";
 
-function SavedNews({ onSignOut }) {
+function SavedNews({ onSignOut, iconMenuIsOpen, setIconMenuIsOpen, onHeaderIconMenuClose }) {
   // const [newsCards, setNewsCards] = React.useState();
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if (history.location.state?.closeIconMenu) {
+      setIconMenuIsOpen(false);
+    }
+    history.replace("/saved-news", {});
+  }, [history, setIconMenuIsOpen]);
 
   const [savedNewsCards, setSavedNewsCards] = React.useState([]);
   const [countSavedNewsCards, setCountSavedNewsCards] = React.useState(0);
@@ -16,14 +25,14 @@ function SavedNews({ onSignOut }) {
   const transferArticlesFromMainApi = (articles) => {
     const list = articles.map((item) => {
       return {
-        "url": item.link,
-        "title": item.title,
-        "urlToImage": item.image,
-        "description": item.text,
-        "publishedAt": item.date,
-        "sourceName": item.source,
-        "keyword": item.keyword,
-        "_id": item._id,
+        url: item.link,
+        title: item.title,
+        urlToImage: item.image,
+        description: item.text,
+        publishedAt: item.date,
+        sourceName: item.source,
+        keyword: item.keyword,
+        _id: item._id,
       };
     });
 
@@ -64,11 +73,17 @@ function SavedNews({ onSignOut }) {
       .catch((err) => {
         console.log(err);
       });
-  }, [bookmarkedNewsCards]);
+  }, []);
 
   return (
     <>
-      <Header isLoggedIn={true} onSignOut={onSignOut}/>
+      <Header
+        isLoggedIn={true}
+        onSignOut={onSignOut}
+        isIconMenuOpen={iconMenuIsOpen}
+        setIconMenuIsOpen={setIconMenuIsOpen}
+        onHeaderIconMenuClose={onHeaderIconMenuClose}
+      />
       <div className="saved-news">
         <h4 className="saved-news__caption">Сохранённые статьи</h4>
         <h1 className="saved-news__title">Грета, у вас {countSavedNewsCards} сохранённых статей</h1>

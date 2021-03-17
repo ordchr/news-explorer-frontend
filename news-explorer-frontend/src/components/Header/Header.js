@@ -25,6 +25,10 @@ function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMen
     onAuthorizeClick();
   };
 
+  const handleClickIconMenu = () => {
+    setIconMenuIsOpen(!isIconMenuOpen);
+  };
+
   return (
     <header
       className={`header 
@@ -38,7 +42,15 @@ function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMen
         </NavLink>
         {currentUser.loggedIn ? (
           <>
-            <NavLink exact to="/saved-news" className={headerNavLinkCSS} activeClassName="header__nav-link-active">
+            <NavLink
+              exact
+              to={{
+                pathname: "/saved-news",
+                state: { closeIconMenu: true },
+              }}
+              className={headerNavLinkCSS}
+              activeClassName="header__nav-link-active"
+            >
               Сохраненные статьи
             </NavLink>
             <NavLink
@@ -68,7 +80,7 @@ function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMen
         className="header-icon-menu__button"
         src={isIconMenuOpen ? iconMenuClose : iconMenu}
         alt="icon menu"
-        onClick={setIconMenuIsOpen}
+        onClick={handleClickIconMenu}
       />
 
       <div
@@ -93,8 +105,8 @@ function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMen
             <img
               className="header-icon-menu__button"
               src={isIconMenuOpen ? iconMenuClose : iconMenu}
-              alt="icon menu"
-              onClick={onHeaderIconMenuClose}
+              alt="icon menu2"
+              onClick={handleClickIconMenu}
             />
           </div>
           <NavLink exact to="/" className={headerIconMenuNavLinkCSS}>
