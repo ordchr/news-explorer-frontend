@@ -92,7 +92,6 @@ function Main({ setCurrentUser, onSignOut }) {
     mainApi
       .login(userData)
       .then((resLogin) => {
-        console.log(resLogin);
         localStorage.setItem("jwt", resLogin["token"]);
         closeAllPopups();
         setCurrentUser({
@@ -119,7 +118,6 @@ function Main({ setCurrentUser, onSignOut }) {
     mainApi
       .getArticles()
       .then((articles) => {
-        console.log(articles);
         const hashArticles = articles.reduce((obj, item) => {
           return {
             [item["link"]]: item._id,
@@ -129,9 +127,6 @@ function Main({ setCurrentUser, onSignOut }) {
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally((_) => {
-        console.log(bookmarkedNewsCards);
       });
   }, []);
 

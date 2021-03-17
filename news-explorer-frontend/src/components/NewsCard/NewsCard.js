@@ -15,7 +15,6 @@ function NewsCard({
 }) {
   const { url, title, urlToImage, description, publishedAt, sourceName, keyword } = newsCard;
 
-  console.log(urlToImage);
   const currentUser = React.useContext(CurrentUserContext);
   const [bookmarkArticleId, setBookmarkArticleId] = useState();
 
@@ -37,12 +36,8 @@ function NewsCard({
   };
 
   useLayoutEffect(() => {
-    console.log(bookmarkedNewsCards);
-    console.log(url);
     if (url in bookmarkedNewsCards) {
-      console.log("bookmark");
       setBookmarkArticleId(bookmarkedNewsCards[url]);
-      console.log(bookmarkArticleId);
     }
   }, [bookmarkedNewsCards, url]);
 
@@ -73,11 +68,9 @@ function NewsCard({
         link: url,
         image: urlToImage,
       };
-      console.log(reqBody);
       mainApi
         .createArticle(reqBody)
         .then((newsCard) => {
-          console.log(newsCard);
           setBookmarkArticleId(newsCard._id);
         })
         .catch((err) => {
@@ -90,7 +83,6 @@ function NewsCard({
     if (!currentUser.loggedIn) {
       return;
     }
-    console.log(bookmarkArticleId);
     mainApi
       .deleteArticle(bookmarkArticleId)
       .then((_) => {

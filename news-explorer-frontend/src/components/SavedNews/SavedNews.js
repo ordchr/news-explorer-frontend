@@ -14,7 +14,6 @@ function SavedNews({ onSignOut }) {
   const [bookmarkedNewsCards, setBookmarkedNewsCards] = React.useState({});
 
   const transferArticlesFromMainApi = (articles) => {
-    console.log(articles);
     const list = articles.map((item) => {
       return {
         "url": item.link,
@@ -28,7 +27,6 @@ function SavedNews({ onSignOut }) {
       };
     });
 
-    console.log(list);
     return list;
   };
 
@@ -41,12 +39,10 @@ function SavedNews({ onSignOut }) {
         countKeywords[article.keyword] = 1;
       }
     }
-    console.log(countKeywords);
     let keywords = Object.keys(countKeywords);
     keywords.sort((a, b) => {
       return countKeywords[b] - countKeywords[a];
     });
-    console.log(keywords);
     return keywords;
   };
 
@@ -57,16 +53,13 @@ function SavedNews({ onSignOut }) {
         setCountSavedNewsCards(articles.length);
         setListKeywords(getKeywordsFromArticles(articles));
         setSavedNewsCards(transferArticlesFromMainApi(articles));
-        console.log(articles);
         const hashArticles = articles.reduce((obj, item) => {
           return {
             ...obj,
             [item["link"]]: item._id,
           };
         }, {});
-        console.log(hashArticles);
         setBookmarkedNewsCards(hashArticles);
-        console.log(bookmarkedNewsCards);
       })
       .catch((err) => {
         console.log(err);
