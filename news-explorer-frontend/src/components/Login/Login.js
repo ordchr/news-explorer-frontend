@@ -3,7 +3,7 @@ import "./Login.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 import { useFormWithValidation } from "../FormValidator/FormValidator";
 
-function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
+function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick, errorMessage }) {
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -33,6 +33,7 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
       isEnter={true}
       onAlternateRegisterClick={onAlternateRegisterClick}
       isValid={isValid}
+      errorMessage={errorMessage}
     >
       <label className="popup__input-label">
         Email:

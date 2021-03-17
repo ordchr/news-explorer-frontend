@@ -1,4 +1,4 @@
-const MAIN_API_BASEURL = "http://172.16.33.33:3001";
+const MAIN_API_BASEURL = "http://151.248.126.46:3001";
 
 class MainApi {
   constructor({ baseUrl, headersAuthorization }) {
@@ -10,7 +10,7 @@ class MainApi {
     const requestData = {
       method: method,
       headers: {
-        authorization: `Bearer ${localStorage.getItem("jwt")}`,
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
         "Content-Type": "application/json",
       },
     };

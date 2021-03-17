@@ -36,6 +36,8 @@ function Main({
   }, [history, setLoginPopupOpen]);
 
   const [registerErrorMessage, setRegisterErrorMessage] = React.useState("");
+  const [loginErrorMessage, setLoginErrorMessage] = React.useState("");
+
 
   const getLocalStorageNewsCards = () => {
     const lsNewsCards = localStorage.getItem("newsCards");
@@ -81,10 +83,11 @@ function Main({
         if (err.status === 400) {
           setRegisterErrorMessage("Не корректно заполнено одно из полей");
           console.log("Не корректно заполнено одно из полей");
-        }
-        if (err.status === 409) {
+        } else if (err.status === 409) {
           setRegisterErrorMessage("Такой пользователь уже существует");
           console.log("Такой пользователь уже существует");
+        } else {
+          setRegisterErrorMessage("Ошибка подключения к серверу");
         }
       });
   };
@@ -106,10 +109,12 @@ function Main({
         console.log(`Ошибка запроса к API. Код ошибки: ${err.status}`);
         if (err.status === 400) {
           console.log("Не передано одно из полей ");
-          setRegisterErrorMessage("Не передано одно из полей ");
+          setLoginErrorMessage("Не передано одно из полей ");
         } else if (err.status === 401) {
           console.log("Пользователь с email не найден");
-          setRegisterErrorMessage("Пользователь с email не найден");
+          setLoginErrorMessage("Пользователь с email не найден");
+        } else {
+          setLoginErrorMessage("Ошибка авторизации");
         }
       });
   };
@@ -168,6 +173,7 @@ function Main({
         onClose={closeAllPopups}
         onAlternateRegisterClick={handleRegisterClick}
         onLoginUser={handleLoginUser}
+        errorMessage={loginErrorMessage}
       />
       <Register
         isOpen={isRegisterPopupOpen}
