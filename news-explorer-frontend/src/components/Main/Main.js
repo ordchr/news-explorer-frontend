@@ -10,8 +10,10 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import mainApi from "../../utils/MainApi";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Main({ setCurrentUser, onSignOut }) {
+  const currentUser = React.useContext(CurrentUserContext);
   const history = useHistory();
   const [isLoginPopupOpen, setLoginPopupOpen] = React.useState();
 
@@ -113,12 +115,14 @@ function Main({ setCurrentUser, onSignOut }) {
       });
   };
 
-
   useEffect(() => {
+    if (!currentUser.loggedIn) {
+      return;
+    }
     mainApi
       .getArticles()
       .then((articles) => {
-        const hashArticles = articles.reduce((obj, item) => {
+        const hashArticles = articles.reduce((_, item) => {
           return {
             [item["link"]]: item._id,
           };
@@ -128,7 +132,7 @@ function Main({ setCurrentUser, onSignOut }) {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [currentUser]);
 
   return (
     <>
