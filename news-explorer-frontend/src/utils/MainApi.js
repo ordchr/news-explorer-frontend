@@ -1,4 +1,4 @@
-const MAIN_API_BASEURL = "http://151.248.126.46:3001";
+const MAIN_API_BASEURL = "http://api.yabp.ru:3001";
 
 class MainApi {
   constructor({ baseUrl, headersAuthorization }) {
