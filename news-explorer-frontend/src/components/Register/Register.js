@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import "./Register.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import { useFormWithValidation } from "../FormValidator/FormValidator";
 
 function Register({ isOpen, onClose, onRegisterUser, onAlternateEnterClick, errorMessage }) {
   const emailRef = useRef();
@@ -17,16 +18,23 @@ function Register({ isOpen, onClose, onRegisterUser, onAlternateEnterClick, erro
     });
   };
 
+  const { handleChange, isValid } = useFormWithValidation();
+
+  const hangleOnClose = () => {
+    onClose();
+  };
+
   return (
     <PopupWithForm
       title="Регистрация"
       name="user-register"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={hangleOnClose}
       onSubmit={handleSubmit}
       isEnter={false}
       onAlternateEnterClick={onAlternateEnterClick}
       errorMessage={errorMessage}
+      isValid={isValid}
     >
       <label className="popup__input-label">
         Email:
@@ -38,6 +46,7 @@ function Register({ isOpen, onClose, onRegisterUser, onAlternateEnterClick, erro
           placeholder="Введите почту"
           required
           ref={emailRef}
+          onChange={handleChange}
         />
       </label>
       <span id="popup-input-email-error" className="popup__input-error" />
@@ -51,6 +60,7 @@ function Register({ isOpen, onClose, onRegisterUser, onAlternateEnterClick, erro
           placeholder="Введите пароль"
           required
           ref={passwordRef}
+          onChange={handleChange}
         />
       </label>
       <span id="popup-input-password-error" className="popup__input-error" />
@@ -64,6 +74,7 @@ function Register({ isOpen, onClose, onRegisterUser, onAlternateEnterClick, erro
           placeholder="Введите своё имя"
           required
           ref={userNameRef}
+          onChange={handleChange}
         />
       </label>
     </PopupWithForm>
