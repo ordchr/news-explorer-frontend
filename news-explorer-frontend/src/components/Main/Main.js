@@ -33,7 +33,7 @@ function Main({
       setLoginPopupOpen(true);
     }
     history.replace("/", {});
-  }, [history]);
+  }, [history, setLoginPopupOpen]);
 
   const [registerErrorMessage, setRegisterErrorMessage] = React.useState("");
 

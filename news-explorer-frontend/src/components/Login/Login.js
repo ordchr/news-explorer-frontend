@@ -1,6 +1,7 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import "./Login.css";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
+import { useFormWithValidation } from "../FormValidator/FormValidator";
 
 function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
   const emailRef = useRef();
@@ -15,15 +16,23 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
     });
   };
 
+  // const { values, handleChange, setValues } = useForm();
+  const { handleChange, isValid } = useFormWithValidation();
+
+  const hangleOnClose = () => {
+    onClose();
+  };
+
   return (
     <PopupWithForm
       title="Вход"
       name="update-avatar"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={hangleOnClose}
       onSubmit={handleSubmit}
       isEnter={true}
       onAlternateRegisterClick={onAlternateRegisterClick}
+      isValid={isValid}
     >
       <label className="popup__input-label">
         Email:
@@ -35,6 +44,7 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
           placeholder="Введите почту"
           required
           ref={emailRef}
+          onChange={handleChange}
         />
       </label>
       <span id="popup-login-input-email-error" className="popup__input-error" />
@@ -48,6 +58,7 @@ function Login({ isOpen, onClose, onLoginUser, onAlternateRegisterClick }) {
           placeholder="Введите пароль"
           required
           ref={passwordRef}
+          onChange={handleChange}
         />
       </label>
       <span id="popup-login-input-password-error" className="popup__input-error" />

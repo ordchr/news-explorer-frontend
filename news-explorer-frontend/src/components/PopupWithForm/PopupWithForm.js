@@ -14,6 +14,7 @@ function PopupWithForm({
   onAlternateEnterClick,
   onAlternateRegisterClick,
   errorMessage,
+  isValid,
 }) {
   // useEffect(() => {
 
@@ -40,10 +41,8 @@ function PopupWithForm({
     [onClose]
   );
 
-  const [isFormFieldValidated, setisFormFieldValidated] = useState(true);
-
   const cssMainButton = `popup__button-save ${
-    isFormFieldValidated ? "popup__button-save_filled" : "popup__button-save_unfilled"
+    isValid ? "popup__button-save_filled" : "popup__button-save_unfilled"
   }`;
 
   useEffect(() => {
@@ -78,7 +77,7 @@ function PopupWithForm({
           >
             {errorMessage}
           </h5>
-          <button className={cssMainButton} type="submit" disabled={!isFormFieldValidated}>
+          <button className={cssMainButton} type="submit" disabled={!isValid}>
             {isEnter ? "Войти" : "Зарегистрироваться"}
           </button>
         </form>
