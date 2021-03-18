@@ -7,7 +7,7 @@ import mainApi from "../../utils/MainApi";
 
 function NewsCard({
   newsCard,
-  isLoggedIn,
+  onDeleteCard,
   isMainPage,
   bookmarkedNewsCards,
   setBookmarkedNewsCards,
@@ -36,10 +36,10 @@ function NewsCard({
   };
 
   useLayoutEffect(() => {
-    if (url in bookmarkedNewsCards) {
+    if (isMainPage && url in bookmarkedNewsCards) {
       setBookmarkArticleId(bookmarkedNewsCards[url]);
     }
-  }, [bookmarkedNewsCards, url]);
+  }, [isMainPage, bookmarkedNewsCards, url]);
 
   const handleBookmarkClick = () => {
     if (!currentUser.loggedIn) {
@@ -84,12 +84,14 @@ function NewsCard({
       return;
     }
     mainApi
-      .deleteArticle(bookmarkArticleId)
+      .deleteArticle(newsCard._id)
       .then((_) => {
-        setBookmarkArticleId();
-        const newList = Object.assign({}, bookmarkedNewsCards);
-        delete newList[url];
-        setBookmarkedNewsCards(newList);
+        const lsNewsCards = JSON.parse(localStorage.getItem("newsCards"));
+        const filteredLsNewsCards = lsNewsCards.filter(function (value) {
+          return value.url !== newsCard.url;
+        });
+        localStorage.setItem("newsCards", JSON.stringify(filteredLsNewsCards));
+        onDeleteCard(newsCard);
       })
       .catch((err) => {
         console.log(err);

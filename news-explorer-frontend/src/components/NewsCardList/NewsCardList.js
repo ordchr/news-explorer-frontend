@@ -5,7 +5,13 @@ import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 import { useLocation } from "react-router-dom";
 import { mainPageUrl } from "../../utils/constants";
 
-function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards, setIsRegisterPopupOpen }) {
+function NewsCardList({
+  newsCards,
+  setSavedNewsCards,
+  bookmarkedNewsCards,
+  setBookmarkedNewsCards,
+  setIsRegisterPopupOpen,
+}) {
   const location = useLocation();
   const [showedRows, setShowedRows] = React.useState(1);
   const [cardsInRow, setCardsInRow] = React.useState(3);
@@ -14,6 +20,13 @@ function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards, 
   const handleClickShowMoreButton = () => {
     setCardsInRow(3); // TODO here need set current grid-template-columns columns count
     setShowedRows(showedRows + 1);
+  };
+
+  const onDeleteCard = (newsCard) => {
+    const filteredNewsCards = newsCards.filter(function (value) {
+      return value.url !== newsCard.url;
+    });
+    setSavedNewsCards(filteredNewsCards);
   };
 
   return (
@@ -27,6 +40,7 @@ function NewsCardList({ newsCards, bookmarkedNewsCards, setBookmarkedNewsCards, 
             bookmarkedNewsCards={bookmarkedNewsCards}
             setBookmarkedNewsCards={setBookmarkedNewsCards}
             setIsRegisterPopupOpen={setIsRegisterPopupOpen}
+            onDeleteCard={onDeleteCard}
           />
         ))}
       </div>

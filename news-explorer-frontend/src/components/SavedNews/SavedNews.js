@@ -22,7 +22,6 @@ function SavedNews({ onSignOut, iconMenuIsOpen, setIconMenuIsOpen, onHeaderIconM
   const [savedNewsCards, setSavedNewsCards] = React.useState([]);
   const [countSavedNewsCards, setCountSavedNewsCards] = React.useState(0);
   const [listKeywords, setListKeywords] = React.useState([]);
-  const [bookmarkedNewsCards, setBookmarkedNewsCards] = React.useState({});
 
   const transferArticlesFromMainApi = (articles) => {
     const list = articles.map((item) => {
@@ -64,13 +63,6 @@ function SavedNews({ onSignOut, iconMenuIsOpen, setIconMenuIsOpen, onHeaderIconM
         setCountSavedNewsCards(articles.length);
         setListKeywords(getKeywordsFromArticles(articles));
         setSavedNewsCards(transferArticlesFromMainApi(articles));
-        const hashArticles = articles.reduce((obj, item) => {
-          return {
-            ...obj,
-            [item["link"]]: item._id,
-          };
-        }, {});
-        setBookmarkedNewsCards(hashArticles);
       })
       .catch((err) => {
         console.log(err);
@@ -100,8 +92,7 @@ function SavedNews({ onSignOut, iconMenuIsOpen, setIconMenuIsOpen, onHeaderIconM
       </div>
       <NewsCardList
         newsCards={savedNewsCards}
-        bookmarkedNewsCards={bookmarkedNewsCards}
-        setBookmarkedNewsCards={setBookmarkedNewsCards}
+        setSavedNewsCards={setSavedNewsCards}
       />
 
       <Footer />
