@@ -5,9 +5,11 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import mainApi from "../../utils/MainApi";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function SavedNews({ onSignOut, iconMenuIsOpen, setIconMenuIsOpen, onHeaderIconMenuClose }) {
   // const [newsCards, setNewsCards] = React.useState();
+  const currentUser = React.useContext(CurrentUserContext);
   const history = useHistory();
 
   React.useEffect(() => {
@@ -86,7 +88,7 @@ function SavedNews({ onSignOut, iconMenuIsOpen, setIconMenuIsOpen, onHeaderIconM
       />
       <div className="saved-news">
         <h4 className="saved-news__caption">Сохранённые статьи</h4>
-        <h1 className="saved-news__title">Грета, у вас {countSavedNewsCards} сохранённых статей</h1>
+        <h1 className="saved-news__title">{currentUser.name}, у вас {countSavedNewsCards} сохранённых статей</h1>
         <h3 className="saved-news__description">
           По ключевым словам:{" "}
           <span className="saved-news__keywords">

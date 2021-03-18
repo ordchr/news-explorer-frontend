@@ -6,7 +6,7 @@ class MainApi {
     this._call = this._call.bind(this);
   }
 
-  _call(method, action, body) {
+  _call(method, action, body, headers) {
     const requestData = {
       method: method,
       headers: {
@@ -14,6 +14,9 @@ class MainApi {
         "Content-Type": "application/json",
       },
     };
+    if (headers) {
+      Object.assign(requestData, { headers: { ...requestData.headers, ...headers } });
+    }
     if (body) {
       requestData.body = JSON.stringify(body);
     }
@@ -50,7 +53,7 @@ class MainApi {
   }
 
   validateToken(jwt) {
-    return this._call("GET", "users/me", "", {
+    return this._call("GET", "users/me", null, {
       Authorization: `Bearer ${jwt}`,
     });
   }
