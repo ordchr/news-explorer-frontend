@@ -1,24 +1,88 @@
-import './App.css';
-import { Route, Switch } from 'react-router-dom';
-import UI from '../UI/UI';
-import Main from '../Main/Main';
-import SavedNews from '../SavedNews/SavedNews';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import { useHistory } from "react-router";
+import "./App.css";
+import UI from "../UI/UI";
+import Main from "../Main/Main";
+import SavedNews from "../SavedNews/SavedNews";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import mainApi from "../../utils/MainApi";
 
 function App() {
+  const history = useHistory();
+
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [iconMenuIsOpen, setIconMenuIsOpen] = React.useState(false);
+  const [isLoginPopupOpen, setLoginPopupOpen] = React.useState();
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      mainApi
+        .validateToken(localStorage.getItem("jwt"))
+        .then((res) => {
+          res.loggedIn = true;
+          setCurrentUser(res);
+          history.push("/");
+        })
+        .catch((err) => {
+          console.log(`Ошибка запроса к API. Код ошибки: ${err.status}`);
+          if (err.status === 401) {
+            console.log("Токен не передан или передан не в том формате. Переданный токен не корректен");
+          }
+        });
+    }
+  }, [history]);
+
+  function onSignOut() {
+    setCurrentUser({});
+    localStorage.removeItem("jwt");
+    history.push("/");
+  }
+
+  function closeAllPopups() {
+    setLoginPopupOpen(false);
+    setIsRegisterPopupOpen(false);
+    setIconMenuIsOpen(false);
+    setIsInfoTooltipOpen(false);
+  }
+
   return (
     <div className="page">
       <div className="page__section">
-        <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <Route path="/ui">
-            <UI />
-          </Route>
-          <Route path="/saved-news">
-            <SavedNews />
-          </Route>
-        </Switch>
+        <CurrentUserContext.Provider value={currentUser}>
+          <Switch>
+            <Route exact path="/">
+              <Main
+                setCurrentUser={setCurrentUser}
+                onSignOut={onSignOut}
+                iconMenuIsOpen={iconMenuIsOpen}
+                setIconMenuIsOpen={setIconMenuIsOpen}
+                closeAllPopups={closeAllPopups}
+                isLoginPopupOpen={isLoginPopupOpen}
+                setLoginPopupOpen={setLoginPopupOpen}
+                isRegisterPopupOpen={isRegisterPopupOpen}
+                setIsRegisterPopupOpen={setIsRegisterPopupOpen}
+                isInfoTooltipOpen={isInfoTooltipOpen}
+                setIsInfoTooltipOpen={setIsInfoTooltipOpen}
+              />
+            </Route>
+            <Route path="/ui">
+              <UI />
+            </Route>
+            <ProtectedRoute
+              path="/saved-news"
+              component={SavedNews}
+              loggedIn={currentUser.loggedIn}
+              onSignOut={onSignOut}
+              iconMenuIsOpen={iconMenuIsOpen}
+              setIconMenuIsOpen={setIconMenuIsOpen}
+              onHeaderIconMenuClose={closeAllPopups}
+            ></ProtectedRoute>
+          </Switch>
+        </CurrentUserContext.Provider>
       </div>
     </div>
   );

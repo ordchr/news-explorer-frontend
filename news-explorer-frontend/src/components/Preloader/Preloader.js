@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 import "./Preloader.css";
-import NotFoundIcon from '../../images/not-found.svg';
+import NotFoundIcon from "../../images/not-found.svg";
 
-function Preloader({isSearchInProgress, isNotFound}) {
-
+function Preloader({ isSearchInProgress, isNotFound }) {
   function SearchInProgress(props) {
     return (
       <div className="preloader">
@@ -16,7 +15,7 @@ function Preloader({isSearchInProgress, isNotFound}) {
   function NotFound(props) {
     return (
       <div className="preloader">
-        <img className="preloader__not-found" src={NotFoundIcon} alt="not-found"/>
+        <img className="preloader__not-found" src={NotFoundIcon} alt="not-found" />
         <h3 className="preloader__not-found-title">Ничего не найдено</h3>
         <p className="preloader__not-found-caption">К сожалению по вашему запросу</p>
         <p className="preloader__not-found-caption">ничего не найдено.</p>
@@ -26,14 +25,9 @@ function Preloader({isSearchInProgress, isNotFound}) {
 
   return (
     <>
-      { isSearchInProgress && !isNotFound &&
-      <SearchInProgress /> 
-      }
-      { isNotFound && !isSearchInProgress &&
-      <NotFound /> 
-      }
+      {isSearchInProgress && !isNotFound && <SearchInProgress />}
+      {isNotFound && !isSearchInProgress && <NotFound />}
     </>
-
   );
 }
 

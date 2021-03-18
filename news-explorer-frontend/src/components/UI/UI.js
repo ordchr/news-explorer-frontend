@@ -5,7 +5,7 @@ import SearchForm from "../SearchForm/SearchForm";
 import Header from "../Header/Header";
 import ShowMoreButton from "../ShowMoreButton/ShowMoreButton";
 import Bookmark from "../Bookmark/Bookmark";
-import LoginFormPopup from "../LoginFormPopup/LoginFormPopup";
+import Login from "../Login/Login";
 
 function UI() {
   const [isLoginFormPopupOpen, setLoginFormPopupOpen] = React.useState(true);
@@ -78,7 +78,7 @@ function UI() {
 
       <Bookmark type={"marked"} />
 
-      <LoginFormPopup
+      <Login
         isOpen={isLoginFormPopupOpen}
         onClose={closeAllPopups}
         onUpdateAvatar={handleUpdateAvatar}

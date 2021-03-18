@@ -94,10 +94,31 @@
 /*   margin-top: 0; */
 /* } */
 
+.popup__error-message {
+  margin: 17px auto 0;
+  align-self: center;
+  font-family: Inter;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: center;
+  color: #FF0000;
+}
+
+.popup__error-message_visible {
+  visibility: visible;
+}
+
+.popup__error-message_hidden {
+  margin-top: 31px;
+  visibility: hidden;
+}
+
 .popup__button-save {
   width: calc(100% - 2 * 36px);
   min-height: 64px;
-  margin: 39px 36px 0;
+  margin: 8px 36px 0;
   font-size: 18px;
   line-height: 24px;
   font-weight: 500;
@@ -133,6 +154,7 @@
 .popup__button-close:hover {
   opacity: 0.6;
 }
+
 
 @media screen and (max-width: 550px) {
   .popup__container {
