@@ -65,7 +65,7 @@ function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMen
               }`}
               onClick={onSignOut}
             >
-              Грета
+              {currentUser.name}
             </div>
           </>
         ) : (
@@ -125,7 +125,7 @@ function Header({ isMainPage, isIconMenuOpen, setIconMenuIsOpen, onHeaderIconMen
                 } `}
                 onClick={onSignOut}
               >
-                Грета
+                {currentUser.name}
               </div>
             </>
           ) : (
